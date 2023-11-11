@@ -1,3 +1,7 @@
+---
+import Example from "../Example.svelte";
+---
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,5 +11,8 @@
     <meta name="generator" content={Astro.generator} />
     <title>Foo</title>
   </head>
-  <body> Hello, Foo!</body>
+  <body>
+    Hello, Foo!
+    <Example client:load />
+  </body>
 </html>
