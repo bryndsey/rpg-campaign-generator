@@ -81,9 +81,13 @@ export function rollDice(diceCount: number, diceSides: number): number[] {
 }
 
 export function getStartingAbilityScore() {
-  const rolls = rollDice(4, 6).sort();
-  rolls.splice(0, 1);
+  // Roll 4d6
+  const rolls = rollDice(4, 6);
 
+  // Drop the lowest
+  rolls.sort().splice(0, 1);
+
+  // Return the sum
   return rolls.reduce((prev, curr) => prev + curr, 0);
 }
 
