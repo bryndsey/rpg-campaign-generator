@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    getAbilities,
     getRandomAlignment,
     getRandomClass,
     getRandomName,
@@ -12,7 +13,7 @@
   let currentRace = getRandomRace();
   let currentAlignment = getRandomAlignment();
 
-  let strength = getStartingAbilityScore();
+  let abilities = getAbilities();
 
   function roll() {
     currentName = getRandomName();
@@ -20,7 +21,7 @@
     currentRace = getRandomRace();
     currentAlignment = getRandomAlignment();
 
-    strength = getStartingAbilityScore();
+    abilities = getAbilities();
   }
 </script>
 
@@ -28,7 +29,11 @@
   <h1>Hello, {currentName}!</h1>
   <h2>{currentRace} {currentClass}</h2>
   <h3>{currentAlignment}</h3>
-  <p>STR: {strength}</p>
+  <ul>
+    {#each abilities as ability}
+      <li>{ability[0]}: {ability[1]}</li>
+    {/each}
+  </ul>
   <button on:click={roll}>Re-roll</button>
 </div>
 

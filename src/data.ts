@@ -48,6 +48,15 @@ const characterAlignments = [
 const alignmentWeights = Array(characterAlignments.length).fill(10);
 alignmentWeights[characterAlignments.length - 1] = 1;
 
+const abilityTypes = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
+] as const;
+
 export function getRandomName() {
   return oneOf(names);
 }
@@ -76,4 +85,10 @@ export function getStartingAbilityScore() {
   rolls.splice(0, 1);
 
   return rolls.reduce((prev, curr) => prev + curr, 0);
+}
+
+export function getAbilities() {
+  return abilityTypes.map(
+    (ability) => [ability, getStartingAbilityScore()] as const
+  );
 }
