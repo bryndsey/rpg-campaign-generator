@@ -1,4 +1,4 @@
-import { oneOf, weighted } from "aimless.js";
+import { intRange, oneOf, weighted } from "aimless.js";
 
 export const names = ["Bryan", "Rachel", "Jameson", "Dean", "Sherlock"];
 
@@ -63,4 +63,17 @@ export function getRandomRace() {
 export function getRandomAlignment() {
   // @ts-expect-error
   return weighted(characterAlignments, alignmentWeights);
+}
+
+export function rollDice(diceCount: number, diceSides: number): number[] {
+  return Array(diceCount)
+    .fill(diceSides)
+    .map((max) => intRange(1, max));
+}
+
+export function getStartingAbilityScore() {
+  const rolls = rollDice(4, 6).sort();
+  rolls.splice(0, 1);
+
+  return rolls.reduce((prev, curr) => prev + curr, 0);
 }

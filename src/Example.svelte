@@ -4,6 +4,7 @@
     getRandomClass,
     getRandomName,
     getRandomRace,
+    getStartingAbilityScore,
   } from "./data";
 
   let currentName = getRandomName();
@@ -11,11 +12,15 @@
   let currentRace = getRandomRace();
   let currentAlignment = getRandomAlignment();
 
+  let strength = getStartingAbilityScore();
+
   function roll() {
     currentName = getRandomName();
     currentClass = getRandomClass();
     currentRace = getRandomRace();
     currentAlignment = getRandomAlignment();
+
+    strength = getStartingAbilityScore();
   }
 </script>
 
@@ -23,6 +28,7 @@
   <h1>Hello, {currentName}!</h1>
   <h2>{currentRace} {currentClass}</h2>
   <h3>{currentAlignment}</h3>
+  <p>STR: {strength}</p>
   <button on:click={roll}>Re-roll</button>
 </div>
 
