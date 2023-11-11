@@ -1,4 +1,4 @@
-import { oneOf } from "aimless.js";
+import { oneOf, weighted } from "aimless.js";
 
 export const names = ["Bryan", "Rachel", "Jameson", "Dean", "Sherlock"];
 
@@ -32,6 +32,22 @@ export const characterRaces = [
   "Tiefling",
 ];
 
+const characterAlignments = [
+  "Lawful good",
+  "Neutral good",
+  "Chaotic good",
+  "Lawful neutral",
+  "True neutral",
+  "Chaotic neutral",
+  "Lawful evil",
+  "Neutral evil",
+  "Chaotic evil",
+  "Unaligned",
+];
+
+const alignmentWeights = Array(characterAlignments.length).fill(10);
+alignmentWeights[characterAlignments.length - 1] = 1;
+
 export function getRandomName() {
   return oneOf(names);
 }
@@ -42,4 +58,9 @@ export function getRandomClass() {
 
 export function getRandomRace() {
   return oneOf(characterRaces);
+}
+
+export function getRandomAlignment() {
+  // @ts-expect-error
+  return weighted(characterAlignments, alignmentWeights);
 }
