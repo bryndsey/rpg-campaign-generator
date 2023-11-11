@@ -30,8 +30,8 @@
   <h2>{currentRace} {currentClass}</h2>
   <h3>{currentAlignment}</h3>
   <ul>
-    {#each abilities as ability}
-      <li>{ability[0]}: {ability[1]}</li>
+    {#each abilities as [ability, score] (ability)}
+      <li>{ability}: {score}</li>
     {/each}
   </ul>
   <button on:click={roll}>Re-roll</button>
