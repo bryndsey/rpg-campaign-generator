@@ -1,4 +1,7 @@
 import { intRange, oneOf, weighted } from "aimless.js";
+import { Chance } from "chance";
+
+const chance = new Chance();
 
 export const names = ["Bryan", "Rachel", "Jameson", "Dean", "Sherlock"];
 
@@ -57,8 +60,24 @@ const abilityTypes = [
   "charisma",
 ] as const;
 
+function imaginaryName() {
+  return chance.capitalize(chance.word());
+}
+
+const nameGenerationFunctions = [
+  () => chance.name(),
+  () => imaginaryName(),
+  () => `${imaginaryName()} ${imaginaryName()}`,
+  () => `${imaginaryName()} ${chance.last()}`,
+  () => `${chance.first()} ${imaginaryName()}`,
+  () => chance.first(),
+  () => chance.last(),
+];
+
 export function getRandomName() {
-  return oneOf(names);
+  // return oneOf(names);
+  // return chance.name();
+  return oneOf(nameGenerationFunctions)();
 }
 
 export function getRandomClass() {
