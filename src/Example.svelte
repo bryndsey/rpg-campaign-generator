@@ -26,7 +26,7 @@
 </script>
 
 <div class="myText">
-  <h1>Hello, {currentName}!</h1>
+  <h1>{currentName}</h1>
   <h2>{currentRace} {currentClass}</h2>
   <h3>{currentAlignment}</h3>
   <ul>
