@@ -36,9 +36,12 @@
     <p>{currentAlignment}</p>
   </div>
 </div>
-<ul>
+<ul class="abilityList">
   {#each abilities as [ability, score] (ability)}
-    <li>{ability}: {score}</li>
+    <li class="abilityItem">
+      <p class="abilityHeader">{ability.toUpperCase()}</p>
+      <p class="abilityValue">{score}</p>
+    </li>
   {/each}
 </ul>
 <button on:click={roll}>Re-roll</button>
@@ -63,5 +66,28 @@
     grid-template-columns: repeat(2, 1fr);
     border: 2px solid black;
     padding: 8px;
+  }
+
+  .abilityList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    width: fit-content;
+  }
+
+  .abilityItem {
+    list-style-type: none;
+    text-align: center;
+    line-height: 0;
+  }
+
+  .abilityHeader {
+    font-size: 0.75rem;
+  }
+
+  .abilityValue {
+    font-size: 2rem;
+    font-weight: bold;
   }
 </style>
