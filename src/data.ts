@@ -35,6 +35,27 @@ export const characterRaces = [
   "Tiefling",
 ];
 
+export const characterBackgrounds = [
+  "Acolyte",
+  "Charlatan",
+  "Criminal",
+  "Entertainer",
+  "Folk Hero",
+  "Gladiator",
+  "Guild Artisan",
+  "Guild Merchant",
+  "Hermit",
+  "Knight",
+  "Noble",
+  "Outlander",
+  "Pirate",
+  "Sage",
+  "Sailor",
+  "Soldier",
+  "Spy",
+  "Urchin",
+];
+
 const characterAlignments = [
   "Lawful good",
   "Neutral good",
@@ -86,6 +107,10 @@ export function getRandomClass() {
 
 export function getRandomRace() {
   return oneOf(characterRaces);
+}
+
+export function getRandomBackground() {
+  return oneOf(characterBackgrounds);
 }
 
 export function getRandomAlignment() {

@@ -2,6 +2,7 @@
   import {
     getAbilities,
     getRandomAlignment,
+    getRandomBackground,
     getRandomClass,
     getRandomName,
     getRandomRace,
@@ -11,6 +12,7 @@
   let currentName = getRandomName();
   let currentClass = getRandomClass();
   let currentRace = getRandomRace();
+  let currentBackground = getRandomBackground();
   let currentAlignment = getRandomAlignment();
 
   let abilities = getAbilities();
@@ -19,6 +21,7 @@
     currentName = getRandomName();
     currentClass = getRandomClass();
     currentRace = getRandomRace();
+    currentBackground = getRandomBackground();
     currentAlignment = getRandomAlignment();
 
     abilities = getAbilities();
@@ -28,6 +31,7 @@
 <div class="myText">
   <h1>{currentName}</h1>
   <h2>{currentRace} {currentClass}</h2>
+  <h3>{currentBackground}</h3>
   <h3>{currentAlignment}</h3>
   <ul>
     {#each abilities as [ability, score] (ability)}
