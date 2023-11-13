@@ -28,7 +28,9 @@
 </script>
 
 <div class="myText characterContainer">
-  <h1>{currentName}</h1>
+  <div class="characterName">
+    <h1>{currentName}</h1>
+  </div>
   <div class="detailContainer">
     <p>{currentClass}</p>
     <p>{currentBackground}</p>
@@ -52,34 +54,53 @@
   }
 
   .characterContainer {
+    display: grid;
     gap: 16px;
     padding: 16px;
 
     @media (min-width: 768px) {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 2fr 3fr;
     }
+  }
+
+  .characterName {
+    text-align: center;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .detailContainer {
     display: grid;
+    gap: 8px;
     grid-template-columns: repeat(2, 1fr);
     border: 2px solid black;
-    padding: 8px;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .detailContainer p {
+    margin: 0;
   }
 
   .abilityList {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: center;
+    align-items: stretch;
     width: fit-content;
+    padding: 16px;
+    margin: 0;
   }
 
   .abilityItem {
     list-style-type: none;
     text-align: center;
     line-height: 0;
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 8px;
   }
 
   .abilityHeader {
