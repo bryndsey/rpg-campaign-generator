@@ -6,7 +6,6 @@
     getRandomClass,
     getRandomName,
     getRandomRace,
-    getStartingAbilityScore,
   } from "./data";
 
   let currentName = getRandomName();
@@ -28,21 +27,41 @@
   }
 </script>
 
-<div class="myText">
+<div class="myText characterContainer">
   <h1>{currentName}</h1>
-  <h2>{currentRace} {currentClass}</h2>
-  <h3>{currentBackground}</h3>
-  <h3>{currentAlignment}</h3>
-  <ul>
-    {#each abilities as [ability, score] (ability)}
-      <li>{ability}: {score}</li>
-    {/each}
-  </ul>
-  <button on:click={roll}>Re-roll</button>
+  <div class="detailContainer">
+    <p>{currentClass}</p>
+    <p>{currentBackground}</p>
+    <p>{currentRace}</p>
+    <p>{currentAlignment}</p>
+  </div>
 </div>
+<ul>
+  {#each abilities as [ability, score] (ability)}
+    <li>{ability}: {score}</li>
+  {/each}
+</ul>
+<button on:click={roll}>Re-roll</button>
 
 <style>
   .myText {
     font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .characterContainer {
+    gap: 16px;
+    padding: 16px;
+
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .detailContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 2px solid black;
+    padding: 8px;
   }
 </style>
