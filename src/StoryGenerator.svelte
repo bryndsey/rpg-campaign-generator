@@ -1,5 +1,5 @@
 <script lang="ts">
-  let data: string;
+  let data;
   let toneInput: string;
   const handleClick = async () => {
     data = await fetch(`./story-${toneInput}`).then((x) => x.json());
@@ -12,7 +12,9 @@
     <button on:click={handleClick}>Submit</button>
   </div>
 
-  <p>
-    {JSON.stringify(data)}
-  </p>
+  {#if data && data.result}
+    <p>{data.params.tone}</p>
+    <p>{data.result.theme}</p>
+    <p>{data.result.story}</p>
+  {/if}
 </div>

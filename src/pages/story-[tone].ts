@@ -61,8 +61,25 @@ async function run(input: string) {
   });
 
   const response = result.response;
+  const themeText = response.text();
+
+  const parts2 = [
+    {
+      text: `You are a creative dungeon master planning out a role-playing game campaign. Given a theme or topic of "${themeText}" and a tone of "${input}", describe the plot of the campaign story.`,
+    },
+  ];
+
+  const result2 = await model.generateContent({
+    contents: [{ role: "user", parts: parts2 }],
+    generationConfig,
+    safetySettings,
+  });
+
   // console.log(response.text());
-  return response.text();
+  return {
+    story: result2.response.text(),
+    theme: themeText,
+  };
 }
 
 export const GET: APIRoute = async ({ params, request }) => {
@@ -80,7 +97,6 @@ export const GET: APIRoute = async ({ params, request }) => {
     JSON.stringify({
       result,
       params,
-      request,
     })
   );
 };
