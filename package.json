@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.3.1",
     "@astrojs/svelte": "^4.0.3",
+    "@google/generative-ai": "^0.1.2",
     "@types/chance": "^1.1.6",
     "aimless.js": "^1.0.4",
     "astro": "^3.4.4",
