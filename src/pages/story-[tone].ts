@@ -1,14 +1,16 @@
-import type { APIRoute } from "astro";
+import type { APIContext, APIRoute } from "astro";
 import {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
 } from "@google/generative-ai";
+import type { ResponseBody } from "../types/ResponseBody";
+import type { ResponseContent } from "../types/ResponseContent";
 
 const MODEL_NAME = "gemini-pro";
 const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 
-async function run(input: string) {
+async function run(input: string): Promise<ResponseContent> {
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
@@ -83,20 +85,28 @@ async function run(input: string) {
 }
 
 export const GET: APIRoute = async ({ params, request }) => {
-  if (params.tone === undefined) {
-    return new Response(
-      JSON.stringify({
-        result: "Missing parameter",
-        params,
-        request,
-      })
-    );
+  let body: ResponseBody;
+  const tone = params["tone"];
+  if (tone === undefined) {
+    body = {
+      result: "error",
+      message: "Missing parameter",
+    };
+    return new Response(JSON.stringify(body));
   }
-  const result = await run(params.tone);
-  return new Response(
-    JSON.stringify({
-      result,
-      params,
-    })
-  );
+  try {
+    const content = await run(tone);
+    body = {
+      result: "success",
+      content,
+      tone,
+    };
+    return new Response(JSON.stringify(body));
+  } catch {
+    body = {
+      result: "error",
+      message: "Unexpected error occurred",
+    };
+    return new Response(JSON.stringify(body));
+  }
 };
