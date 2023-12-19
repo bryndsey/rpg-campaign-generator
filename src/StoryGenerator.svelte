@@ -11,7 +11,7 @@
     } catch {
       data = {
         result: "error",
-        message: "Ran into an unexpected error. Try again",
+        error: "Ran into an unexpected error. Try again",
       };
     } finally {
       loading = false;
@@ -30,7 +30,15 @@
   {:else if data}
     {#if data.result === "error"}
       <p>An error occurred.</p>
-      <p>{data.message}</p>
+      <p>
+        {data.error instanceof Error
+          ? data.error.message
+          : typeof data.error === "string"
+            ? data.error
+            : typeof data.error === "object"
+              ? JSON.stringify(data.error)
+              : "Unknown error"}
+      </p>
     {:else}
       <p>{data.tone}</p>
       <p>{data.content.theme}</p>

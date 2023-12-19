@@ -6,4 +6,4 @@ export type ResponseBody =
       content: ResponseContent;
       tone: string;
     }
-  | { result: "error"; message: string };
+  | { result: "error"; error: unknown };

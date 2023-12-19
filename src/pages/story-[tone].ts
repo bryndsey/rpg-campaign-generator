@@ -90,7 +90,7 @@ export const GET: APIRoute = async ({ params, request }) => {
   if (tone === undefined) {
     body = {
       result: "error",
-      message: "Missing parameter",
+      error: "Missing parameter.",
     };
     return new Response(JSON.stringify(body));
   }
@@ -102,10 +102,10 @@ export const GET: APIRoute = async ({ params, request }) => {
       tone,
     };
     return new Response(JSON.stringify(body));
-  } catch {
+  } catch (error) {
     body = {
       result: "error",
-      message: "Unexpected error occurred",
+      error,
     };
     return new Response(JSON.stringify(body));
   }
