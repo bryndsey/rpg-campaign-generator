@@ -1,8 +1,14 @@
 <script lang="ts">
   let data;
+  let loading = false;
   let toneInput: string;
   const handleClick = async () => {
-    data = await fetch(`./story-${toneInput}`).then((x) => x.json());
+    loading = true;
+    try {
+      data = await fetch(`./story-${toneInput}`).then((x) => x.json());
+    } finally {
+      loading = false;
+    }
   };
 </script>
 
@@ -12,7 +18,9 @@
     <button on:click={handleClick}>Submit</button>
   </div>
 
-  {#if data && data.result}
+  {#if loading}
+    <p>Loading...</p>
+  {:else if data && data.result}
     <p>{data.params.tone}</p>
     <p>{data.result.theme}</p>
     <p>{data.result.story}</p>
