@@ -46,3 +46,25 @@
     {/if}
   {/if}
 </div>
+
+<style>
+  .container {
+    max-width: 50ch;
+    margin: auto;
+    padding: 32px;
+  }
+
+  p {
+    white-space: pre-line;
+  }
+
+  .input-area {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .input-area > input {
+    flex: 1;
+  }
+</style>
