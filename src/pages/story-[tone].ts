@@ -42,16 +42,26 @@ async function run(input: string): Promise<ResponseContent> {
 
   const parts = [
     {
-      text: " You are a creative writer. Given a tone, describe in a few words a compelling theme or topic for a story that would fit the tone",
+      text: "You are a creative writer. Given a brief tone, topic, or genre as input, briefly describe a compelling theme for a story that would fit the input. The theme may be directly related to the input, or it could abstract and tangentially related.",
     },
-    { text: "tone: Tragic" },
+    { text: "tone: Tragedy" },
     { text: "output: Forbidden love that leads to death." },
-    { text: "tone: Serious" },
-    { text: "output: The struggle between technology and nature." },
     { text: "tone: Humorous" },
     { text: "output: Mistaken identity leads to unexpected consequences." },
     { text: "tone: Uplifting" },
     { text: "output: Hope in the face of adversity." },
+    { text: "tone: Platypus" },
+    {
+      text: "output: The challenges of being in a misfit in a world of conformity.",
+    },
+    { text: "tone: Technology, serious" },
+    { text: "output: Advancing technology threatens the natural world." },
+    { text: "tone: Technology, comedy" },
+    { text: "output: The absurdity of modern technology." },
+    { text: "tone: Green" },
+    { text: "output: Discovering the unexpected beauty of nature." },
+    { text: "tone: Green, politics" },
+    { text: "output: The staggering cost of capitalism on the individual." },
     { text: `tone: ${input}` },
     { text: "output: " },
   ];
@@ -67,7 +77,7 @@ async function run(input: string): Promise<ResponseContent> {
 
   const parts2 = [
     {
-      text: `You are a creative dungeon master planning out a role-playing game campaign. Given a theme or topic of "${themeText}" and a tone of "${input}", describe the plot of the campaign story.`,
+      text: `You are a creative dungeon master planning out a role-playing game campaign. Given a theme of "${themeText}" and a tone/topic/genre of "${input}", describe the plot of the campaign story.`,
     },
   ];
 
