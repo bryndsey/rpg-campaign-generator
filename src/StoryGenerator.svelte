@@ -21,8 +21,8 @@
 
 <div class="container">
   <div class="input-area">
-    <input bind:value={toneInput} />
-    <button on:click={handleClick}>Submit</button>
+    <input bind:value={toneInput} disabled={loading} />
+    <button on:click={handleClick} disabled={loading}>Submit</button>
   </div>
 
   {#if loading}
