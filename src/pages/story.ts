@@ -7,10 +7,18 @@ import {
 import type { ResponseBody } from "../types/ResponseBody";
 import type { ResponseContent } from "../types/ResponseContent";
 
+export const MAX_INPUT_CHARACTERS = 40;
+
 const MODEL_NAME = "gemini-pro";
 const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 
 async function run(input: string): Promise<ResponseContent> {
+  if (input.length > MAX_INPUT_CHARACTERS) {
+    throw new Error(
+      `Input is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`
+    );
+  }
+
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { MAX_INPUT_CHARACTERS } from "./pages/story";
   import type { ResponseBody } from "./types/ResponseBody";
 
   let data: ResponseBody | undefined;
@@ -21,7 +22,11 @@
 
 <div class="container">
   <div class="input-area">
-    <input bind:value={toneInput} disabled={loading} />
+    <input
+      bind:value={toneInput}
+      disabled={loading}
+      maxlength={MAX_INPUT_CHARACTERS}
+    />
     <button on:click={handleClick} disabled={loading}>Submit</button>
   </div>
 
