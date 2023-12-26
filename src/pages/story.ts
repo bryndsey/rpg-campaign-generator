@@ -95,9 +95,10 @@ async function run(input: string): Promise<ResponseContent> {
 }
 
 export const GET: APIRoute = async ({ params, request }) => {
+  const urlObj = new URL(request.url);
   let body: ResponseBody;
-  const tone = params["tone"];
-  if (tone === undefined) {
+  const tone = urlObj.searchParams.get("tone");
+  if (tone === undefined || tone === null) {
     body = {
       result: "error",
       error: "Missing parameter.",

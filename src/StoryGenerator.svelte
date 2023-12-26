@@ -7,7 +7,7 @@
   const handleClick = async () => {
     loading = true;
     try {
-      data = await fetch(`./story-${toneInput}`).then((x) => x.json());
+      data = await fetch(`./story?tone=${toneInput}`).then((x) => x.json());
     } catch {
       data = {
         result: "error",
