@@ -31,7 +31,7 @@
   </div>
 
   {#if loading}
-    <p>Loading...</p>
+    <h2>Crafting campaign ideas. Please wait...</h2>
   {:else if data}
     {#if data.result === "error"}
       <p>An error occurred.</p>
