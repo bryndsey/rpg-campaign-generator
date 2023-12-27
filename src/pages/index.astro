@@ -1,19 +1,10 @@
 ---
 import Example from "../Example.svelte";
 import StoryGenerator from "../StoryGenerator.svelte";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>RPG Campaign Generator</title>
-  </head>
-  <body>
-    <!-- <Example client:load /> -->
-    <StoryGenerator client:load />
-  </body>
-</html>
+<Layout title="RPG Campaign Generator">
+  <!-- <Example client:load /> -->
+  <StoryGenerator client:load />
+</Layout>
