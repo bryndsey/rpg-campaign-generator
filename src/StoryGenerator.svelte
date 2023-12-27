@@ -35,31 +35,52 @@
     </div>
   </label>
 
-  {#if loading}
-    <h2>Crafting campaign ideas. Please wait...</h2>
-  {:else if data}
-    {#if data.result === "error"}
-      <p>An error occurred.</p>
-      <p>
-        {data.error instanceof Error
-          ? data.error.message
-          : typeof data.error === "string"
-            ? data.error
-            : typeof data.error === "object"
-              ? JSON.stringify(data.error)
-              : "Unknown error"}
-      </p>
-    {:else}
-      <p>{data.tone}</p>
-      <p>{data.content.theme}</p>
-      <p>{data.content.story}</p>
-    {/if}
-  {/if}
+  <div class="output-container">
+    <div class="metadata">
+      <div>
+        <h3>Input</h3>
+        <p>
+          {data && data.result === "success" && data.tone
+            ? data.tone
+            : "Input a prompt"}
+        </p>
+      </div>
+      <div>
+        <h3>Theme</h3>
+        <p>
+          {data && data.result === "success" && data.content.theme
+            ? data.content.theme
+            : "Input a prompt to generate a theme"}
+        </p>
+      </div>
+    </div>
+    <div class="result-container">
+      {#if loading}
+        <h2>Crafting campaign ideas. Please wait...</h2>
+      {:else if data}
+        {#if data.result === "error"}
+          <p>An error occurred.</p>
+          <p>
+            {data.error instanceof Error
+              ? data.error.message
+              : typeof data.error === "string"
+                ? data.error
+                : typeof data.error === "object"
+                  ? JSON.stringify(data.error)
+                  : "Unknown error"}
+          </p>
+        {:else}
+          <p class="plot">{data.content.story}</p>
+        {/if}
+      {:else}
+        <p>Input a prompt as a starting point for your campaign plot.</p>
+      {/if}
+    </div>
+  </div>
 </div>
 
 <style>
   .container {
-    max-width: 50ch;
     margin: auto;
     padding: 32px;
   }
@@ -76,5 +97,36 @@
 
   .input-area > input {
     flex: 1;
+    max-width: 60ch;
+  }
+
+  .output-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  .metadata {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .metadata > * {
+    padding: 16px;
+    border: 2px solid lightgrey;
+    border-radius: 8px;
+  }
+
+  .result-container {
+    flex: 1;
+    margin-inline: auto;
+  }
+
+  .plot {
+    max-width: 50ch;
   }
 </style>
