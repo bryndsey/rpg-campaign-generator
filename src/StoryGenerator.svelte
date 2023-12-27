@@ -20,11 +20,11 @@
   };
 </script>
 
-<div class="container m-auto p-8">
-  <header>
+<div class="container m-auto flex flex-col min-h-[100svh] px-8">
+  <header class="my-4">
     <h1 class="text-2xl">RPG Campaign Generator</h1>
   </header>
-  <main class="mt-6">
+  <main class="flex-1">
     <label class="form-control">
       <div class="label">
         <span class="label-text"> Enter a prompt </span>
@@ -91,6 +91,17 @@
       </div>
     </div>
   </main>
+  <footer class="footer footer-center p-4 text-base-content">
+    <aside>
+      <p>
+        RPG Campaign Generator is meant to be used strictly as a source of
+        inspriation. It makes no copyright claims or warranties on the content
+        generated. The content is provided by third-party sources, and could
+        contain inappropriate content or content based on existing copyrights.
+        Use at your own risk, and please use responsibly.
+      </p>
+    </aside>
+  </footer>
 </div>
 
 <style>
