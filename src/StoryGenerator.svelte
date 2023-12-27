@@ -40,21 +40,25 @@
 
   <div class="output-container">
     <div class="metadata">
-      <div>
-        <h3>Input</h3>
-        <p>
-          {data && data.result === "success" && data.tone
-            ? data.tone
-            : "Input a prompt"}
-        </p>
+      <div class="card card-bordered">
+        <div class="card-body">
+          <h3 class="card-title">Input</h3>
+          <p>
+            {data && data.result === "success" && data.tone
+              ? data.tone
+              : "Input a prompt"}
+          </p>
+        </div>
       </div>
-      <div>
-        <h3>Theme</h3>
-        <p>
-          {data && data.result === "success" && data.content.theme
-            ? data.content.theme
-            : "Input a prompt to generate a theme"}
-        </p>
+      <div class="card card-bordered">
+        <div class="card-body">
+          <h3 class="card-title">Theme</h3>
+          <p>
+            {data && data.result === "success" && data.content.theme
+              ? data.content.theme
+              : "Input a prompt to generate a theme"}
+          </p>
+        </div>
       </div>
     </div>
     <div class="result-container">
@@ -118,11 +122,11 @@
     width: 100%;
   }
 
-  .metadata > * {
+  /* .metadata > * {
     padding: 16px;
     border: 2px solid lightgrey;
     border-radius: 8px;
-  }
+  } */
 
   .result-container {
     flex: 1;
