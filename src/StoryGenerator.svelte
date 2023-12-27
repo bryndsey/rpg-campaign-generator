@@ -20,13 +20,13 @@
   };
 </script>
 
-<div class="container">
+<main class="container m-auto p-8">
   <h1>RPG Campaign Generator</h1>
-  <label id="prompt-label"
+  <label
     >Enter a prompt
-    <div class="input-area">
+    <div class="flex flex-row gap-2">
       <input
-        class="input input-bordered"
+        class="input input-bordered flex-1 max-w-prose"
         bind:value={toneInput}
         disabled={loading}
         maxlength={MAX_INPUT_CHARACTERS}
@@ -38,8 +38,8 @@
     </div>
   </label>
 
-  <div class="output-container">
-    <div class="metadata">
+  <div class="flex flex-row gap-4 mt-8">
+    <div class="metadata flex flex-col gap-2 max-w-xs w-full">
       <div class="card card-bordered">
         <div class="card-body">
           <h3 class="card-title">Input</h3>
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="result-container">
+    <div class="flex-1">
       {#if loading}
         <h2>Crafting campaign ideas. Please wait...</h2>
       {:else if data}
@@ -77,63 +77,17 @@
                   : "Unknown error"}
           </p>
         {:else}
-          <p class="plot">{data.content.story}</p>
+          <p class="max-w-prose">{data.content.story}</p>
         {/if}
       {:else}
         <p>Input a prompt as a starting point for your campaign plot.</p>
       {/if}
     </div>
   </div>
-</div>
+</main>
 
 <style>
-  .container {
-    margin: auto;
-    padding: 32px;
-  }
-
   p {
     white-space: pre-line;
-  }
-
-  .input-area {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .input-area > input {
-    flex: 1;
-    max-width: 60ch;
-  }
-
-  .output-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 16px;
-    gap: 16px;
-  }
-
-  .metadata {
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
-    max-width: 300px;
-    width: 100%;
-  }
-
-  /* .metadata > * {
-    padding: 16px;
-    border: 2px solid lightgrey;
-    border-radius: 8px;
-  } */
-
-  .result-container {
-    flex: 1;
-    margin-inline: auto;
-  }
-
-  .plot {
-    max-width: 50ch;
   }
 </style>
