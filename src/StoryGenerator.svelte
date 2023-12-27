@@ -26,12 +26,15 @@
     >Enter a prompt
     <div class="input-area">
       <input
+        class="input input-bordered"
         bind:value={toneInput}
         disabled={loading}
         maxlength={MAX_INPUT_CHARACTERS}
         placeholder="e.g. 'Dark', 'Banana', 'Tuesday', 'Yellow', etc."
       />
-      <button on:click={handleClick} disabled={loading}>Submit</button>
+      <button class="btn" on:click={handleClick} disabled={loading}
+        >Submit</button
+      >
     </div>
   </label>
 
