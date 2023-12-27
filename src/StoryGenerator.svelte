@@ -21,14 +21,19 @@
 </script>
 
 <div class="container">
-  <div class="input-area">
-    <input
-      bind:value={toneInput}
-      disabled={loading}
-      maxlength={MAX_INPUT_CHARACTERS}
-    />
-    <button on:click={handleClick} disabled={loading}>Submit</button>
-  </div>
+  <h1>RPG Campaign Generator</h1>
+  <label id="prompt-label"
+    >Enter a prompt
+    <div class="input-area">
+      <input
+        bind:value={toneInput}
+        disabled={loading}
+        maxlength={MAX_INPUT_CHARACTERS}
+        placeholder="e.g. 'Dark', 'Banana', 'Tuesday', 'Yellow', etc."
+      />
+      <button on:click={handleClick} disabled={loading}>Submit</button>
+    </div>
+  </label>
 
   {#if loading}
     <h2>Crafting campaign ideas. Please wait...</h2>
