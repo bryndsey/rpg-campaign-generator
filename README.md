@@ -13,4 +13,6 @@ It is still in a very rough state, but I think serves as a decent proof of conce
 - Typescript
 - Astro
 - Svelte
+- Tailwind CSS
+- Daisy UI
 - Google Gemini AI
