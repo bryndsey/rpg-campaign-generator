@@ -69,6 +69,7 @@
       <div class="flex-1">
         {#if loading}
           <h2>Crafting campaign ideas. Please wait...</h2>
+          <span class="loading loading-spinner"></span>
         {:else if data}
           {#if data.result === "error"}
             <p>An error occurred.</p>
