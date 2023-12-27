@@ -12,12 +12,14 @@
   "dependencies": {
     "@astrojs/check": "^0.3.1",
     "@astrojs/svelte": "^4.0.3",
+    "@astrojs/tailwind": "^5.0.4",
     "@google/generative-ai": "^0.1.2",
     "@types/chance": "^1.1.6",
     "aimless.js": "^1.0.4",
     "astro": "^3.4.4",
     "chance": "^1.1.11",
     "svelte": "^4.2.2",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2"
   }
 }
