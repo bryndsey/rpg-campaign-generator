@@ -20,11 +20,13 @@
   };
 </script>
 
-<div class="container m-auto flex flex-col min-h-[100svh] px-8">
+<div
+  class="container m-auto flex flex-col max-h-dvh h-dvh px-8 overflow-hidden"
+>
   <header class="my-4">
     <h1 class="text-2xl">RPG Campaign Generator</h1>
   </header>
-  <main class="flex-1">
+  <main class="flex-1 flex flex-col overflow-hidden">
     <label class="form-control">
       <div class="label">
         <span class="label-text"> Enter a prompt </span>
@@ -43,8 +45,8 @@
       </div>
     </label>
 
-    <div class="flex flex-row gap-4 mt-8">
-      <div class="metadata flex flex-col gap-2 max-w-xs w-full">
+    <div class="flex flex-row gap-4 mt-8 flex-1 overflow-hidden">
+      <div class="flex flex-col gap-2 max-w-xs w-full">
         <div class="card card-bordered">
           <div class="card-body">
             <h3 class="card-title">Input</h3>
@@ -66,28 +68,32 @@
           </div>
         </div>
       </div>
-      <div class="flex-1">
-        {#if loading}
-          <h2>Crafting campaign ideas. Please wait...</h2>
-          <span class="loading loading-spinner"></span>
-        {:else if data}
-          {#if data.result === "error"}
-            <p>An error occurred.</p>
-            <p>
-              {data.error instanceof Error
-                ? data.error.message
-                : typeof data.error === "string"
-                  ? data.error
-                  : typeof data.error === "object"
-                    ? JSON.stringify(data.error)
-                    : "Unknown error"}
-            </p>
+      <div class="flex-1 card card-bordered">
+        <div class="overflow-y-auto">
+          {#if loading}
+            <h2>Crafting campaign ideas. Please wait...</h2>
+            <span class="loading loading-spinner"></span>
+          {:else if data}
+            {#if data.result === "error"}
+              <p>An error occurred.</p>
+              <p>
+                {data.error instanceof Error
+                  ? data.error.message
+                  : typeof data.error === "string"
+                    ? data.error
+                    : typeof data.error === "object"
+                      ? JSON.stringify(data.error)
+                      : "Unknown error"}
+              </p>
+            {:else}
+              <p class="max-w-prose m-auto">
+                {data.content.story}
+              </p>
+            {/if}
           {:else}
-            <p class="max-w-prose m-auto">{data.content.story}</p>
+            <p>Input a prompt as a starting point for your campaign plot.</p>
           {/if}
-        {:else}
-          <p>Input a prompt as a starting point for your campaign plot.</p>
-        {/if}
+        </div>
       </div>
     </div>
   </main>
