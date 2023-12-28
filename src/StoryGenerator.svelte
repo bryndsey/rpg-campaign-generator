@@ -21,19 +21,19 @@
 </script>
 
 <div
-  class="container m-auto flex flex-col max-h-dvh h-dvh px-8 overflow-hidden"
+  class="container m-auto flex h-dvh max-h-dvh flex-col overflow-hidden px-8"
 >
   <header class="my-4">
     <h1 class="text-2xl">RPG Campaign Generator</h1>
   </header>
-  <main class="flex-1 flex flex-col overflow-hidden">
+  <main class="flex flex-1 flex-col overflow-hidden">
     <label class="form-control">
       <div class="label">
         <span class="label-text"> Enter a prompt </span>
       </div>
       <div class="flex flex-row gap-2">
         <input
-          class="input input-bordered flex-1 max-w-prose"
+          class="input input-bordered max-w-prose flex-1"
           bind:value={toneInput}
           disabled={loading}
           maxlength={MAX_INPUT_CHARACTERS}
@@ -45,8 +45,8 @@
       </div>
     </label>
 
-    <div class="flex flex-row gap-4 mt-8 flex-1 overflow-hidden">
-      <div class="flex flex-col gap-2 max-w-xs w-full">
+    <div class="mt-8 flex flex-1 flex-row gap-4 overflow-hidden">
+      <div class="flex w-full max-w-xs flex-col gap-2">
         <div class="card card-bordered">
           <div class="card-body">
             <h3 class="card-title">Input</h3>
@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="flex-1 card card-bordered">
+      <div class="card card-bordered flex-1">
         <div class="overflow-y-auto">
           {#if loading}
             <h2>Crafting campaign ideas. Please wait...</h2>
@@ -86,7 +86,7 @@
                       : "Unknown error"}
               </p>
             {:else}
-              <p class="max-w-prose m-auto">
+              <p class="m-auto max-w-prose">
                 {data.content.story}
               </p>
             {/if}

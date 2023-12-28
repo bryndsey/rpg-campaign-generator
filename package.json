@@ -23,6 +23,9 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "daisyui": "^4.4.24"
+    "daisyui": "^4.4.24",
+    "prettier": "^3.1.1",
+    "prettier-plugin-svelte": "^3.1.2",
+    "prettier-plugin-tailwindcss": "^0.5.9"
   }
 }
