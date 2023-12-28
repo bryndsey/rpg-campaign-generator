@@ -69,7 +69,7 @@
         </div>
       </div>
       <div class="card card-bordered flex-1">
-        <div class="overflow-y-auto">
+        <div class="card-body overflow-y-auto">
           {#if loading}
             <h2>Crafting campaign ideas. Please wait...</h2>
             <span class="loading loading-spinner"></span>
