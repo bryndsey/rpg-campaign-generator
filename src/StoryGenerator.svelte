@@ -48,28 +48,6 @@
       class="mt-2 flex flex-1 flex-col gap-4 overflow-y-clip md:mt-8 md:flex-row"
     >
       <div
-        class="grid w-full grid-cols-2 gap-2 md:flex md:max-w-xs md:flex-col"
-      >
-        <div class="card card-compact bg-base-content/5">
-          <div class="card-body">
-            <h3 class="card-title">Input</h3>
-            <p>
-              {data && data.result === "success" && data.tone ? data.tone : "-"}
-            </p>
-          </div>
-        </div>
-        <div class="card card-compact bg-base-content/5">
-          <div class="card-body">
-            <h3 class="card-title">Theme</h3>
-            <p>
-              {data && data.result === "success" && data.content.theme
-                ? data.content.theme
-                : "-"}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
         class="card flex-1 overflow-y-clip bg-base-content/5 max-lg:card-compact"
       >
         <div class="card-body overflow-y-auto">
@@ -96,6 +74,28 @@
           {:else}
             <p>Input a prompt as a starting point for your campaign plot.</p>
           {/if}
+        </div>
+      </div>
+      <div
+        class="grid w-full grid-cols-2 gap-2 md:flex md:max-w-xs md:flex-col"
+      >
+        <div class="card card-compact bg-base-content/5">
+          <div class="card-body">
+            <h3 class="card-title">Input</h3>
+            <p>
+              {data && data.result === "success" && data.tone ? data.tone : "-"}
+            </p>
+          </div>
+        </div>
+        <div class="card card-compact bg-base-content/5">
+          <div class="card-body">
+            <h3 class="card-title">Theme</h3>
+            <p>
+              {data && data.result === "success" && data.content.theme
+                ? data.content.theme
+                : "-"}
+            </p>
+          </div>
         </div>
       </div>
     </div>
