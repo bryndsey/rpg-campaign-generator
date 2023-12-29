@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tones } from "./types/tones";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
   import type { ResponseBody } from "./types/ResponseBody";
 
@@ -26,24 +27,6 @@
     <h1 class="text-lg md:text-2xl">RPG Campaign Generator</h1>
   </header>
   <main class="flex flex-1 flex-col overflow-y-clip">
-    <label class="form-control">
-      <div class="label">
-        <span class="label-text"> Enter a prompt </span>
-      </div>
-      <div class="flex flex-row gap-2">
-        <input
-          class="input input-bordered max-w-prose flex-1"
-          bind:value={toneInput}
-          disabled={loading}
-          maxlength={MAX_INPUT_CHARACTERS}
-          placeholder="e.g. 'Dark', 'Banana', 'Tuesday', 'Yellow', etc."
-        />
-        <button class="btn" on:click={handleClick} disabled={loading}
-          >Submit</button
-        >
-      </div>
-    </label>
-
     <div
       class="mt-2 flex flex-1 flex-col gap-4 overflow-y-clip md:mt-8 md:flex-row"
     >
@@ -76,27 +59,37 @@
           {/if}
         </div>
       </div>
-      <div
-        class="grid w-full grid-cols-2 gap-2 md:flex md:max-w-xs md:flex-col"
-      >
-        <div class="card card-compact bg-base-content/5">
-          <div class="card-body">
-            <h3 class="card-title">Input</h3>
-            <p>
-              {data && data.result === "success" && data.tone ? data.tone : "-"}
-            </p>
+      <div class="flex w-full flex-col gap-2 md:max-w-xs">
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Tone</span>
           </div>
-        </div>
-        <div class="card card-compact bg-base-content/5">
-          <div class="card-body">
-            <h3 class="card-title">Theme</h3>
-            <p>
-              {data && data.result === "success" && data.content.theme
-                ? data.content.theme
-                : "-"}
-            </p>
+          <select
+            class="select select-bordered"
+            disabled={loading}
+            bind:value={toneInput}
+          >
+            {#each tones as tone}
+              <option>{tone}</option>
+            {/each}
+          </select>
+        </label>
+
+        <label class="form-control">
+          <div class="label">
+            <span class="label-text">Topic</span>
           </div>
-        </div>
+          <input
+            type="text"
+            class="input input-bordered max-w-prose placeholder:opacity-60"
+            disabled={loading}
+            maxlength={MAX_INPUT_CHARACTERS}
+            placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
+          />
+        </label>
+        <button class="btn" on:click={handleClick} disabled={loading}
+          >Submit</button
+        >
       </div>
     </div>
   </main>
