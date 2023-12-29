@@ -69,37 +69,41 @@
           {/if}
         </div>
       </div>
-      <div class="flex w-full flex-col gap-2 md:max-w-xs">
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Tone</span>
-          </div>
-          <select
-            class="select select-bordered"
-            disabled={loading}
-            bind:value={tone}
-          >
-            {#each tones as tone}
-              <option>{tone}</option>
-            {/each}
-          </select>
-        </label>
+      <div class="w-full md:max-w-xs">
+        <div class="flex flex-row gap-2 md:flex-col">
+          <label class="form-control w-full max-md:flex-1">
+            <div class="label">
+              <span class="label-text">Tone</span>
+            </div>
+            <select
+              class="select select-bordered"
+              disabled={loading}
+              bind:value={tone}
+            >
+              {#each tones as tone}
+                <option>{tone}</option>
+              {/each}
+            </select>
+          </label>
 
-        <label class="form-control">
-          <div class="label">
-            <span class="label-text">Topic</span>
-          </div>
-          <input
-            bind:value={topic}
-            type="text"
-            class="input input-bordered max-w-prose placeholder:opacity-60"
-            disabled={loading}
-            maxlength={MAX_INPUT_CHARACTERS}
-            placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
-          />
-        </label>
-        <button class="btn" on:click={handleClick} disabled={loading}
-          >Submit</button
+          <label class="form-control max-md:flex-1">
+            <div class="label">
+              <span class="label-text">Topic</span>
+            </div>
+            <input
+              bind:value={topic}
+              type="text"
+              class="input input-bordered max-w-prose placeholder:opacity-60"
+              disabled={loading}
+              maxlength={MAX_INPUT_CHARACTERS}
+              placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
+            />
+          </label>
+        </div>
+        <button
+          class="btn mt-4 w-full"
+          on:click={handleClick}
+          disabled={loading}>Submit</button
         >
       </div>
     </div>
