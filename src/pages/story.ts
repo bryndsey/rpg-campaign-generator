@@ -15,7 +15,7 @@ const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 async function run(input: string): Promise<ResponseContent> {
   if (input.length > MAX_INPUT_CHARACTERS) {
     throw new Error(
-      `Input is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`
+      `Input is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
     );
   }
 
@@ -32,7 +32,7 @@ async function run(input: string): Promise<ResponseContent> {
   const safetySettings = [
     {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
     },
     {
       category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
@@ -40,11 +40,11 @@ async function run(input: string): Promise<ResponseContent> {
     },
     {
       category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
     },
     {
       category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
     },
   ];
 
