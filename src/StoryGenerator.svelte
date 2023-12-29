@@ -45,9 +45,11 @@
       </div>
     </label>
 
-    <div class="mt-8 flex flex-1 flex-row gap-4 overflow-y-clip">
-      <div class="flex w-full max-w-xs flex-col gap-2">
-        <div class="card card-bordered">
+    <div class="mt-8 flex flex-1 flex-col gap-4 overflow-y-clip md:flex-row">
+      <div
+        class="grid w-full grid-cols-2 gap-2 md:flex md:max-w-xs md:flex-col"
+      >
+        <div class="card card-compact bg-base-content/5">
           <div class="card-body">
             <h3 class="card-title">Input</h3>
             <p>
@@ -57,7 +59,7 @@
             </p>
           </div>
         </div>
-        <div class="card card-bordered">
+        <div class="card card-compact bg-base-content/5">
           <div class="card-body">
             <h3 class="card-title">Theme</h3>
             <p>
@@ -68,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="card card-bordered flex-1">
+      <div class="card flex-1 bg-base-content/5 max-lg:card-compact">
         <div class="card-body overflow-y-auto">
           {#if loading}
             <h2>Crafting campaign ideas. Please wait...</h2>
