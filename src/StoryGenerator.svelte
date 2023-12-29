@@ -21,12 +21,12 @@
 </script>
 
 <div
-  class="container m-auto flex h-dvh max-h-dvh flex-col overflow-hidden px-8"
+  class="container m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-8"
 >
   <header class="my-4">
     <h1 class="text-2xl">RPG Campaign Generator</h1>
   </header>
-  <main class="flex flex-1 flex-col overflow-hidden">
+  <main class="flex flex-1 flex-col overflow-y-clip">
     <label class="form-control">
       <div class="label">
         <span class="label-text"> Enter a prompt </span>
@@ -45,7 +45,7 @@
       </div>
     </label>
 
-    <div class="mt-8 flex flex-1 flex-row gap-4 overflow-hidden">
+    <div class="mt-8 flex flex-1 flex-row gap-4 overflow-y-clip">
       <div class="flex w-full max-w-xs flex-col gap-2">
         <div class="card card-bordered">
           <div class="card-body">
