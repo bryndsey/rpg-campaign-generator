@@ -20,11 +20,9 @@
   };
 </script>
 
-<div
-  class="container m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-8"
->
+<div class="m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-4 md:px-8">
   <header class="my-4">
-    <h1 class="text-2xl">RPG Campaign Generator</h1>
+    <h1 class="text-lg md:text-2xl">RPG Campaign Generator</h1>
   </header>
   <main class="flex flex-1 flex-col overflow-y-clip">
     <label class="form-control">
@@ -45,7 +43,9 @@
       </div>
     </label>
 
-    <div class="mt-8 flex flex-1 flex-col gap-4 overflow-y-clip md:flex-row">
+    <div
+      class="mt-2 flex flex-1 flex-col gap-4 overflow-y-clip md:mt-8 md:flex-row"
+    >
       <div
         class="grid w-full grid-cols-2 gap-2 md:flex md:max-w-xs md:flex-col"
       >
