@@ -102,11 +102,10 @@
   <footer class="footer footer-center p-4 text-base-content">
     <aside>
       <p class="max-w-prose whitespace-normal opacity-80">
-        RPG Campaign Generator is meant to be used strictly as a source of
-        inspriation and makes no copyright claims or warranties on the content
-        generated. The content is provided by third-party sources, and could
-        contain inappropriate content or content based on existing copyrights.
-        Use at your own risk, and please use responsibly.
+        RPG Campaign Generator is meant to be used merely as a source of
+        inspriation, and makes no copyright claims or warranties on the content
+        generated. The content may not be entirely original or appropriate. Use
+        at your own risk, and please use responsibly.
       </p>
     </aside>
   </footer>
