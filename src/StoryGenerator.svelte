@@ -70,7 +70,9 @@
           </div>
         </div>
       </div>
-      <div class="card flex-1 bg-base-content/5 max-lg:card-compact">
+      <div
+        class="card flex-1 overflow-y-clip bg-base-content/5 max-lg:card-compact"
+      >
         <div class="card-body overflow-y-auto">
           {#if loading}
             <h2>Crafting campaign ideas. Please wait...</h2>
