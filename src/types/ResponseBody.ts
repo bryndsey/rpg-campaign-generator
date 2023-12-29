@@ -4,6 +4,7 @@ export type ResponseBody =
   | {
       result: "success";
       content: ResponseContent;
-      tone: string;
+      tone?: string;
+      topic?: string;
     }
-  | { result: "error"; error: unknown };
+  | { result: "error"; error: unknown; tone?: string; topic?: string };

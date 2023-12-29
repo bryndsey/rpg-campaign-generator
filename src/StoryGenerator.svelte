@@ -5,12 +5,22 @@
 
   let data: ResponseBody | undefined;
   let loading = false;
-  let toneInput: string;
+  let tone: "Unspecified";
+  let topic: string | undefined;
   const handleClick = async () => {
     loading = true;
     data = undefined;
     try {
-      data = await fetch(`./story?tone=${toneInput}`).then((x) => x.json());
+      const queryParams = new URLSearchParams();
+      if (tone !== "Unspecified") {
+        queryParams.append("tone", tone);
+      }
+      if (topic) {
+        queryParams.append("topic", topic);
+      }
+      data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
+        x.json(),
+      );
     } catch {
       data = {
         result: "error",
@@ -67,7 +77,7 @@
           <select
             class="select select-bordered"
             disabled={loading}
-            bind:value={toneInput}
+            bind:value={tone}
           >
             {#each tones as tone}
               <option>{tone}</option>
@@ -80,6 +90,7 @@
             <span class="label-text">Topic</span>
           </div>
           <input
+            bind:value={topic}
             type="text"
             class="input input-bordered max-w-prose placeholder:opacity-60"
             disabled={loading}
