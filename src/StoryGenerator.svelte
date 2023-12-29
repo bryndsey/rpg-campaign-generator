@@ -7,6 +7,7 @@
   let toneInput: string;
   const handleClick = async () => {
     loading = true;
+    data = undefined;
     try {
       data = await fetch(`./story?tone=${toneInput}`).then((x) => x.json());
     } catch {
@@ -53,9 +54,7 @@
           <div class="card-body">
             <h3 class="card-title">Input</h3>
             <p>
-              {data && data.result === "success" && data.tone
-                ? data.tone
-                : "Input a prompt"}
+              {data && data.result === "success" && data.tone ? data.tone : "-"}
             </p>
           </div>
         </div>
@@ -65,7 +64,7 @@
             <p>
               {data && data.result === "success" && data.content.theme
                 ? data.content.theme
-                : "Input a prompt to generate a theme"}
+                : "-"}
             </p>
           </div>
         </div>
