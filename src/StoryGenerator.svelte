@@ -101,9 +101,9 @@
       </div>
     </div>
   </main>
-  <footer class="footer footer-center p-4 text-base-content">
+  <footer class="footer footer-center p-4">
     <aside>
-      <p class="max-w-prose whitespace-normal opacity-80">
+      <p class="whitespace-normal text-xs opacity-80">
         RPG Campaign Generator is meant to be used merely as a source of
         inspriation, and makes no copyright claims or warranties on the content
         generated. The content may not be entirely original or appropriate. Use
