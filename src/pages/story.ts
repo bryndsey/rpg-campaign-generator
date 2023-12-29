@@ -12,10 +12,15 @@ export const MAX_INPUT_CHARACTERS = 40;
 const MODEL_NAME = "gemini-pro";
 const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 
-async function run(input: string): Promise<ResponseContent> {
-  if (input.length > MAX_INPUT_CHARACTERS) {
+async function run(tone?: string, topic?: string): Promise<ResponseContent> {
+  if (tone && tone.length > MAX_INPUT_CHARACTERS) {
     throw new Error(
-      `Input is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+      `Tone is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+    );
+  }
+  if (topic && topic.length > MAX_INPUT_CHARACTERS) {
+    throw new Error(
+      `Topic is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
     );
   }
 
@@ -50,27 +55,28 @@ async function run(input: string): Promise<ResponseContent> {
 
   const parts = [
     {
-      text: "You are a creative writer. Given a brief tone, topic, or genre as input, briefly describe a compelling theme for a story that would fit the input. The theme may be directly related to the input, or it could abstract and tangentially related.",
+      text: "You are a creative writer. Given an optional input of tone and topic, describe in a few words a compelling theme or topic for a story that would fit the tone and topic.",
     },
-    { text: "tone: Tragedy" },
-    { text: "output: Forbidden love that leads to death." },
-    { text: "tone: Humorous" },
-    { text: "output: Mistaken identity leads to unexpected consequences." },
+    { text: "tone: Tragic" },
+    { text: "topic: " },
+    { text: "out: Forbidden love that leads to death." },
+    { text: "tone: " },
+    { text: "topic: Technology" },
+    { text: "out: The struggle between technology and nature." },
+    { text: "tone: " },
+    { text: "topic: Green" },
+    { text: "out: Discovering the unexpected beauty of nature." },
     { text: "tone: Uplifting" },
-    { text: "output: Hope in the face of adversity." },
-    { text: "tone: Platypus" },
-    {
-      text: "output: The challenges of being in a misfit in a world of conformity.",
-    },
-    { text: "tone: Technology, serious" },
-    { text: "output: Advancing technology threatens the natural world." },
-    { text: "tone: Technology, comedy" },
-    { text: "output: The absurdity of modern technology." },
-    { text: "tone: Green" },
-    { text: "output: Discovering the unexpected beauty of nature." },
-    { text: "tone: Green, politics" },
-    { text: "output: The staggering cost of capitalism on the individual." },
-    { text: `tone: ${input}` },
+    { text: "topic: Platypus" },
+    { text: "out: Overcoming differences to find one's place in the world." },
+    { text: "tone: " },
+    { text: "topic: " },
+    { text: "out: A hero's journey for justice." },
+    { text: "tone: Serious" },
+    { text: "topic: Green, politics" },
+    { text: "out: The staggering cost of capitalism on the individual." },
+    { text: `tone: ${tone}` },
+    { text: `topic: ${topic}` },
     { text: "output: " },
   ];
 
@@ -83,9 +89,17 @@ async function run(input: string): Promise<ResponseContent> {
   const response = result.response;
   const themeText = response.text();
 
+  const tonePromptText = tone ? ` The tone of the campaign is "${tone}".` : "";
+  const topicPromptText = topic
+    ? ` The topic of the campaign is "${topic}".`
+    : "";
+
+  const storyPromptText = `You are a creative dungeon master planning out a role-playing game campaign with a theme of "${themeText}".${topicPromptText}${tonePromptText} Describe the plot of this campaign story.`;
+
+  console.log(storyPromptText);
   const parts2 = [
     {
-      text: `You are a creative dungeon master planning out a role-playing game campaign. Given a theme of "${themeText}" and a tone/topic/genre of "${input}", describe the plot of the campaign story.`,
+      text: storyPromptText,
     },
   ];
 
@@ -105,26 +119,23 @@ async function run(input: string): Promise<ResponseContent> {
 export const GET: APIRoute = async ({ params, request }) => {
   const urlObj = new URL(request.url);
   let body: ResponseBody;
-  const tone = urlObj.searchParams.get("tone");
-  if (tone === undefined || tone === null) {
-    body = {
-      result: "error",
-      error: "Missing parameter.",
-    };
-    return new Response(JSON.stringify(body));
-  }
+  const tone = urlObj.searchParams.get("tone") ?? undefined;
+  const topic = urlObj.searchParams.get("topic") ?? undefined;
   try {
-    const content = await run(tone);
+    const content = await run(tone, topic);
     body = {
       result: "success",
       content,
       tone,
+      topic,
     };
     return new Response(JSON.stringify(body));
   } catch (error) {
     body = {
       result: "error",
       error,
+      tone,
+      topic,
     };
     return new Response(JSON.stringify(body));
   }
