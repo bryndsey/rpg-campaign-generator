@@ -37,4 +37,6 @@ export const tones = [
   "Whimsical",
   "Wistful",
   "Witty",
-];
+] as const;
+
+export type Tone = (typeof tones)[number];

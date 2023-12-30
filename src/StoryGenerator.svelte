@@ -2,20 +2,19 @@
   import Footer from "./Footer.svelte";
 
   import { tones } from "./types/tones";
-  import { topic } from "./stores/campaign";
+  import { tone, topic } from "./stores/campaign";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
   import type { ResponseBody } from "./types/ResponseBody";
 
   let data: ResponseBody | undefined;
   let loading = false;
-  let tone: "Unspecified";
   const handleClick = async () => {
     loading = true;
     data = undefined;
     try {
       const queryParams = new URLSearchParams();
-      if (tone !== "Unspecified") {
-        queryParams.append("tone", tone);
+      if ($tone !== "Unspecified") {
+        queryParams.append("tone", $tone);
       }
       if ($topic) {
         queryParams.append("topic", $topic);
@@ -80,7 +79,7 @@
             <select
               class="select select-bordered"
               disabled={loading}
-              bind:value={tone}
+              bind:value={$tone}
             >
               {#each tones as tone}
                 <option>{tone}</option>
