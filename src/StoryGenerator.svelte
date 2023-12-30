@@ -2,13 +2,13 @@
   import Footer from "./Footer.svelte";
 
   import { tones } from "./types/tones";
+  import { topic } from "./stores/campaign";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
   import type { ResponseBody } from "./types/ResponseBody";
 
   let data: ResponseBody | undefined;
   let loading = false;
   let tone: "Unspecified";
-  let topic: string | undefined;
   const handleClick = async () => {
     loading = true;
     data = undefined;
@@ -17,8 +17,8 @@
       if (tone !== "Unspecified") {
         queryParams.append("tone", tone);
       }
-      if (topic) {
-        queryParams.append("topic", topic);
+      if ($topic) {
+        queryParams.append("topic", $topic);
       }
       data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
         x.json(),
@@ -93,7 +93,7 @@
               <span class="label-text">Topic</span>
             </div>
             <input
-              bind:value={topic}
+              bind:value={$topic}
               type="text"
               class="input input-bordered max-w-prose placeholder:opacity-60"
               disabled={loading}
