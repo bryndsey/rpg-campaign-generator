@@ -2,15 +2,12 @@
   import Footer from "./Footer.svelte";
 
   import { tones } from "./types/tones";
-  import { tone, topic } from "./stores/campaign";
+  import { tone, topic, state } from "./stores/campaign";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
   import type { ResponseBody } from "./types/ResponseBody";
 
-  let data: ResponseBody | undefined;
-  let loading = false;
   const handleClick = async () => {
-    loading = true;
-    data = undefined;
+    $state = { state: "loading" };
     try {
       const queryParams = new URLSearchParams();
       if ($tone !== "Unspecified") {
@@ -19,16 +16,22 @@
       if ($topic) {
         queryParams.append("topic", $topic);
       }
-      data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
+      const data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
         x.json(),
       );
+      $state = {
+        state: "data",
+        data,
+      };
     } catch {
-      data = {
+      const data: ResponseBody = {
         result: "error",
         error: "Ran into an unexpected error. Try again",
       };
-    } finally {
-      loading = false;
+      $state = {
+        state: "data",
+        data,
+      };
     }
   };
 </script>
@@ -45,24 +48,24 @@
         class="card flex-1 overflow-y-clip bg-base-content/5 max-lg:card-compact"
       >
         <div class="card-body overflow-y-auto">
-          {#if loading}
+          {#if $state.state === "loading"}
             <h2>Crafting campaign ideas. Please wait...</h2>
             <span class="loading loading-spinner"></span>
-          {:else if data}
-            {#if data.result === "error"}
+          {:else if $state.state === "data"}
+            {#if $state.data.result === "error"}
               <p>An error occurred.</p>
               <p>
-                {data.error instanceof Error
-                  ? data.error.message
-                  : typeof data.error === "string"
-                    ? data.error
-                    : typeof data.error === "object"
-                      ? JSON.stringify(data.error)
+                {$state.data.error instanceof Error
+                  ? $state.data.error.message
+                  : typeof $state.data.error === "string"
+                    ? $state.data.error
+                    : typeof $state.data.error === "object"
+                      ? JSON.stringify($state.data.error)
                       : "Unknown error"}
               </p>
             {:else}
               <p class="m-auto max-w-prose">
-                {data.content.story}
+                {$state.data.content.story}
               </p>
             {/if}
           {:else}
@@ -78,7 +81,7 @@
             </div>
             <select
               class="select select-bordered"
-              disabled={loading}
+              disabled={$state.state === "loading"}
               bind:value={$tone}
             >
               {#each tones as tone}
@@ -95,7 +98,7 @@
               bind:value={$topic}
               type="text"
               class="input input-bordered max-w-prose placeholder:opacity-60"
-              disabled={loading}
+              disabled={$state.state === "loading"}
               maxlength={MAX_INPUT_CHARACTERS}
               placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
             />
@@ -104,7 +107,7 @@
         <button
           class="btn mt-4 w-full"
           on:click={handleClick}
-          disabled={loading}>Submit</button
+          disabled={$state.state === "loading"}>Submit</button
         >
       </div>
     </div>
