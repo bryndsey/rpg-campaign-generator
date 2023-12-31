@@ -1,39 +1,9 @@
 <script lang="ts">
   import Footer from "./Footer.svelte";
-
-  import { tones } from "./types/tones";
-  import { tone, topic, state } from "./stores/campaign";
+  import { fetchStory } from "./network/fetchStory";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
-  import type { ResponseBody } from "./types/ResponseBody";
-
-  const handleClick = async () => {
-    $state = { state: "loading" };
-    try {
-      const queryParams = new URLSearchParams();
-      if ($tone !== "Unspecified") {
-        queryParams.append("tone", $tone);
-      }
-      if ($topic) {
-        queryParams.append("topic", $topic);
-      }
-      const data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
-        x.json(),
-      );
-      $state = {
-        state: "data",
-        data,
-      };
-    } catch {
-      const data: ResponseBody = {
-        result: "error",
-        error: "Ran into an unexpected error. Try again",
-      };
-      $state = {
-        state: "data",
-        data,
-      };
-    }
-  };
+  import { state, tone, topic } from "./stores/campaign";
+  import { tones } from "./types/tones";
 </script>
 
 <div class="m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-4 md:px-8">
@@ -106,7 +76,7 @@
         </div>
         <button
           class="btn mt-4 w-full"
-          on:click={handleClick}
+          on:click={fetchStory}
           disabled={$state.state === "loading"}>Submit</button
         >
       </div>
