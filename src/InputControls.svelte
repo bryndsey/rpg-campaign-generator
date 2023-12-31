@@ -10,8 +10,8 @@
 </script>
 
 <div class={className}>
-  <div class="flex flex-row gap-2 md:flex-col">
-    <label class="form-control w-full max-md:flex-1">
+  <div class="flex flex-row gap-2 landscape:flex-col">
+    <label class="form-control w-full portrait:flex-1">
       <div class="label">
         <span class="label-text">Tone</span>
       </div>
@@ -26,7 +26,7 @@
       </select>
     </label>
 
-    <label class="form-control max-md:flex-1">
+    <label class="form-control portrait:flex-1">
       <div class="label">
         <span class="label-text">Topic</span>
       </div>
