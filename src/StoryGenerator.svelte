@@ -1,9 +1,8 @@
 <script lang="ts">
+  import InputControls from "./InputControls.svelte";
+
   import Footer from "./Footer.svelte";
-  import { fetchStory } from "./network/fetchStory";
-  import { MAX_INPUT_CHARACTERS } from "./pages/story";
-  import { state, tone, topic } from "./stores/campaign";
-  import { tones } from "./types/tones";
+  import { state } from "./stores/campaign";
 </script>
 
 <div class="m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-4 md:px-8">
@@ -43,43 +42,7 @@
           {/if}
         </div>
       </div>
-      <div class="w-full md:max-w-xs">
-        <div class="flex flex-row gap-2 md:flex-col">
-          <label class="form-control w-full max-md:flex-1">
-            <div class="label">
-              <span class="label-text">Tone</span>
-            </div>
-            <select
-              class="select select-bordered"
-              disabled={$state.state === "loading"}
-              bind:value={$tone}
-            >
-              {#each tones as tone}
-                <option>{tone}</option>
-              {/each}
-            </select>
-          </label>
-
-          <label class="form-control max-md:flex-1">
-            <div class="label">
-              <span class="label-text">Topic</span>
-            </div>
-            <input
-              bind:value={$topic}
-              type="text"
-              class="input input-bordered max-w-prose placeholder:opacity-60"
-              disabled={$state.state === "loading"}
-              maxlength={MAX_INPUT_CHARACTERS}
-              placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
-            />
-          </label>
-        </div>
-        <button
-          class="btn mt-4 w-full"
-          on:click={fetchStory}
-          disabled={$state.state === "loading"}>Submit</button
-        >
-      </div>
+      <InputControls class="w-full md:max-w-xs" />
     </div>
   </main>
   <Footer></Footer>
