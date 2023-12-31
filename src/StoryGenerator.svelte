@@ -10,15 +10,11 @@
   <header class="my-4">
     <h1 class="text-lg md:text-2xl">RPG Campaign Generator</h1>
   </header>
-  <main class="flex flex-1 flex-col overflow-y-clip">
-    <div
-      class="mt-2 flex flex-1 flex-col gap-4 overflow-y-clip md:mt-8 md:flex-row"
-    >
-      <div class="flex flex-1 place-items-stretch">
-        <OutputDisplay></OutputDisplay>
-      </div>
-      <InputControls class="w-full md:max-w-xs" />
+  <main class="flex flex-1 flex-col gap-4 overflow-y-clip md:flex-row">
+    <div class="flex flex-1 place-items-stretch">
+      <OutputDisplay></OutputDisplay>
     </div>
+    <InputControls class="w-full md:max-w-xs" />
   </main>
   <Footer></Footer>
 </div>
