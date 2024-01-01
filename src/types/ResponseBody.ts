@@ -11,6 +11,7 @@ const zodResponseBody = z.discriminatedUnion("result", [
   z.object({
     result: z.literal("error"),
     errorMessage: z.string(),
+    errorCause: z.string().optional(),
     tone: z.string().optional(),
     topic: z.string().optional(),
   }),

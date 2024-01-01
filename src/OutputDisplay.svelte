@@ -13,13 +13,19 @@
       </div>
     {:else if $state.state === "data"}
       {#if $state.data.result === "error"}
-        <div class="grid h-full place-content-center place-items-center gap-4">
+        <div
+          class="grid h-full place-content-center place-items-center gap-4 text-balance text-center"
+        >
           <h2 class="text-2xl">Looks like we rolled a Nat 1...</h2>
-          <p>An error occurred trying to generate your campaign idea.</p>
-          {#if devMode}
-            <p>
-              {$state.data.errorMessage}
-            </p>
+          {#if $state.data.errorCause === "INVALID INPUT" || $state.data.errorCause === "SAFETY"}
+            <p class="m-auto max-w-prose">{$state.data.errorMessage}</p>
+          {:else}
+            <p>An error occurred trying to generate your campaign idea.</p>
+            {#if devMode}
+              <p>
+                {$state.data.errorMessage}
+              </p>
+            {/if}
           {/if}
         </div>
       {:else}

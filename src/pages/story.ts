@@ -16,12 +16,14 @@ const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 async function run(tone?: string, topic?: string): Promise<ResponseContent> {
   if (tone && tone.length > MAX_INPUT_CHARACTERS) {
     throw new Error(
-      `Tone is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+      `Your tone is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+      { cause: "INVALID INPUT" },
     );
   }
   if (topic && topic.length > MAX_INPUT_CHARACTERS) {
     throw new Error(
-      `Topic is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+      `Your topic is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
+      { cause: "INVALID INPUT" },
     );
   }
 
@@ -46,7 +48,7 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     },
     {
       category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_NONE,
+      threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
     },
     {
       category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
@@ -94,11 +96,12 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     themePromptFeedback.blockReason !== undefined
   ) {
     throw new Error(
-      `Theme prompt blocked due to ${themePromptFeedback.blockReason}.${
+      `The prompt was blocked due to ${themePromptFeedback.blockReason.toLocaleLowerCase()}. You may need to modify your prompt to reduce the chances of blocked content.${
         themePromptFeedback.blockReasonMessage
           ? ` Message: ${themePromptFeedback.blockReasonMessage}`
           : ""
       }`,
+      { cause: "SAFETY" },
     );
   }
   const themeText = themeResponse.text();
@@ -130,11 +133,12 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     storyPromptFeedback.blockReasonMessage !== undefined
   ) {
     throw new Error(
-      `Story prompt blocked due to ${storyPromptFeedback.blockReason}.${
+      `The prompt was blocked due to ${storyPromptFeedback.blockReason.toLocaleLowerCase()}. You may need to modify your prompt to reduce the chances of blocked content.${
         storyPromptFeedback.blockReasonMessage
           ? ` Message: ${storyPromptFeedback.blockReasonMessage}`
           : ""
       }`,
+      { cause: "SAFETY" },
     );
   }
 
@@ -160,9 +164,15 @@ export const GET: APIRoute = async ({ params, request }) => {
     };
     return new Response(JSON.stringify(body));
   } catch (error) {
+    const errorObj = safeGetError(error);
+    let errorCause: string | undefined = undefined;
+    if (errorObj.cause !== undefined && typeof errorObj.cause === "string") {
+      errorCause = errorObj.cause;
+    }
     body = {
       result: "error",
-      errorMessage: safeGetError(error).message,
+      errorMessage: errorObj.message,
+      errorCause,
       tone,
       topic,
     };
