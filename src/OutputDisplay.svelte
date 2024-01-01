@@ -18,13 +18,7 @@
           <p>An error occurred trying to generate your campaign idea.</p>
           {#if devMode}
             <p>
-              {$state.data.error instanceof Error
-                ? $state.data.error.message
-                : typeof $state.data.error === "string"
-                  ? $state.data.error
-                  : typeof $state.data.error === "object"
-                    ? JSON.stringify($state.data.error)
-                    : "Unknown error"}
+              {$state.data.errorMessage}
             </p>
           {/if}
         </div>
