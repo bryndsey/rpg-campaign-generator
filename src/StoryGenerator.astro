@@ -1,10 +1,8 @@
-<script lang="ts">
+---
   import OutputDisplay from "./OutputDisplay.svelte";
-
   import InputControls from "./InputControls.svelte";
-
   import Footer from "./Footer.svelte";
-</script>
+---
 
 <div
   class="m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-4 landscape:px-8"
@@ -14,9 +12,9 @@
   </header>
   <main class="flex flex-1 flex-col gap-4 overflow-y-clip landscape:flex-row">
     <div class="flex flex-1 place-items-stretch">
-      <OutputDisplay></OutputDisplay>
+      <OutputDisplay client:load/>
     </div>
-    <InputControls class="w-full landscape:max-w-xs" />
+    <InputControls class="w-full landscape:max-w-xs" client:load />
   </main>
   <Footer></Footer>
 </div>
