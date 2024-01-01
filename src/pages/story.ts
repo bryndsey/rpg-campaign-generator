@@ -90,12 +90,12 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
   const themeResponse = themeResult.response;
   const themePromptFeedback = themeResponse.promptFeedback;
   if (
-    themePromptFeedback != null &&
+    themePromptFeedback !== undefined &&
     themePromptFeedback.blockReason !== undefined
   ) {
     throw new Error(
-      `Theme prompt blocked due to ${themePromptFeedback?.blockReason}.${
-        themePromptFeedback?.blockReasonMessage
+      `Theme prompt blocked due to ${themePromptFeedback.blockReason}.${
+        themePromptFeedback.blockReasonMessage
           ? ` Message: ${themePromptFeedback.blockReasonMessage}`
           : ""
       }`,
@@ -130,8 +130,8 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     storyPromptFeedback.blockReasonMessage !== undefined
   ) {
     throw new Error(
-      `Story prompt blocked due to ${storyPromptFeedback?.blockReason}.${
-        storyPromptFeedback?.blockReasonMessage
+      `Story prompt blocked due to ${storyPromptFeedback.blockReason}.${
+        storyPromptFeedback.blockReasonMessage
           ? ` Message: ${storyPromptFeedback.blockReasonMessage}`
           : ""
       }`,
