@@ -54,7 +54,7 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     },
   ];
 
-  const parts = [
+  const themePromptParts = [
     {
       text: "You are a creative writer. Given an optional input of tone and topic, describe in a few words a compelling theme or topic for a story that would fit the tone and topic.",
     },
@@ -81,14 +81,27 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     { text: "output: " },
   ];
 
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts }],
+  const themeResult = await model.generateContent({
+    contents: [{ role: "user", parts: themePromptParts }],
     generationConfig,
     safetySettings,
   });
 
-  const response = result.response;
-  const themeText = response.text();
+  const themeResponse = themeResult.response;
+  const themePromptFeedback = themeResponse.promptFeedback;
+  if (
+    themePromptFeedback != null &&
+    themePromptFeedback.blockReason !== undefined
+  ) {
+    throw new Error(
+      `Theme prompt blocked due to ${themePromptFeedback?.blockReason}.${
+        themePromptFeedback?.blockReasonMessage
+          ? ` Message: ${themePromptFeedback.blockReasonMessage}`
+          : ""
+      }`,
+    );
+  }
+  const themeText = themeResponse.text();
 
   const tonePromptText = tone ? ` The tone of the campaign is "${tone}".` : "";
   const topicPromptText = topic
@@ -97,22 +110,37 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
 
   const storyPromptText = `You are a creative dungeon master planning out a role-playing game campaign with a theme of "${themeText}".${topicPromptText}${tonePromptText} Describe the plot of this campaign story.`;
 
-  console.log(storyPromptText);
-  const parts2 = [
+  // console.log(storyPromptText);
+  const storyPromptParts = [
     {
       text: storyPromptText,
     },
   ];
 
-  const result2 = await model.generateContent({
-    contents: [{ role: "user", parts: parts2 }],
+  const storyResult = await model.generateContent({
+    contents: [{ role: "user", parts: storyPromptParts }],
     generationConfig,
     safetySettings,
   });
 
+  const storyResponse = storyResult.response;
+  const storyPromptFeedback = storyResponse.promptFeedback;
+  if (
+    storyPromptFeedback !== undefined &&
+    storyPromptFeedback.blockReasonMessage !== undefined
+  ) {
+    throw new Error(
+      `Story prompt blocked due to ${storyPromptFeedback?.blockReason}.${
+        storyPromptFeedback?.blockReasonMessage
+          ? ` Message: ${storyPromptFeedback.blockReasonMessage}`
+          : ""
+      }`,
+    );
+  }
+
   // console.log(response.text());
   return {
-    story: result2.response.text(),
+    story: storyResponse.text(),
     theme: themeText,
   };
 }
