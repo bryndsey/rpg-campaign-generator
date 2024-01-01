@@ -1,5 +1,6 @@
+import { safeGetError } from "../safeGetError";
 import { tone, topic, state } from "../stores/campaign";
-import type { ResponseBody } from "../types/ResponseBody";
+import { validateResponseBody, type ResponseBody } from "../types/ResponseBody";
 
 export const fetchStory = async () => {
   state.set({ state: "loading" });
@@ -13,17 +14,21 @@ export const fetchStory = async () => {
     if ($topic) {
       queryParams.append("topic", $topic);
     }
-    const data = await fetch(`./story?${queryParams.toString()}`).then((x) =>
-      x.json(),
+    const fetchResult = await fetch(`./story?${queryParams.toString()}`).then(
+      (x) => x.json(),
     );
+
+    const data = validateResponseBody(fetchResult);
+
     state.set({
       state: "data",
       data,
     });
-  } catch {
+  } catch (error) {
+    console.log(error);
     const data: ResponseBody = {
       result: "error",
-      error: "Ran into an unexpected error. Try again",
+      errorMessage: safeGetError(error).message,
     };
     state.set({
       state: "data",

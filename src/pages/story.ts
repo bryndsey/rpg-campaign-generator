@@ -6,6 +6,7 @@ import {
 } from "@google/generative-ai";
 import type { ResponseBody } from "../types/ResponseBody";
 import type { ResponseContent } from "../types/ResponseContent";
+import { safeGetError } from "../safeGetError";
 
 export const MAX_INPUT_CHARACTERS = 40;
 
@@ -133,7 +134,7 @@ export const GET: APIRoute = async ({ params, request }) => {
   } catch (error) {
     body = {
       result: "error",
-      error,
+      errorMessage: safeGetError(error).message,
       tone,
       topic,
     };
