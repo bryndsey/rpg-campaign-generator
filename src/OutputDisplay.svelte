@@ -1,5 +1,7 @@
 <script lang="ts">
   import { state } from "./stores/campaign";
+
+  const devMode = import.meta.env.DEV;
 </script>
 
 <div class="card w-full overflow-y-clip bg-base-content/5 max-lg:card-compact">
@@ -11,18 +13,23 @@
       </div>
     {:else if $state.state === "data"}
       {#if $state.data.result === "error"}
-        <p>An error occurred.</p>
-        <p>
-          {$state.data.error instanceof Error
-            ? $state.data.error.message
-            : typeof $state.data.error === "string"
-              ? $state.data.error
-              : typeof $state.data.error === "object"
-                ? JSON.stringify($state.data.error)
-                : "Unknown error"}
-        </p>
+        <div class="grid h-full place-content-center place-items-center gap-4">
+          <h2 class="text-2xl">Looks like we rolled a Nat 1...</h2>
+          <p>An error occurred trying to generate your campaign idea.</p>
+          {#if devMode}
+            <p>
+              {$state.data.error instanceof Error
+                ? $state.data.error.message
+                : typeof $state.data.error === "string"
+                  ? $state.data.error
+                  : typeof $state.data.error === "object"
+                    ? JSON.stringify($state.data.error)
+                    : "Unknown error"}
+            </p>
+          {/if}
+        </div>
       {:else}
-        <p class="m-auto max-w-prose">
+        <p class="m-auto max-w-prose whitespace-pre-line">
           {$state.data.content.story}
         </p>
       {/if}
@@ -42,9 +49,3 @@
     {/if}
   </div>
 </div>
-
-<style>
-  p {
-    white-space: pre-line;
-  }
-</style>
