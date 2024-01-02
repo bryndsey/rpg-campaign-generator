@@ -2,13 +2,14 @@
   import OutputDisplay from "./OutputDisplay.svelte";
   import InputControls from "./InputControls.svelte";
   import Footer from "./Footer.svelte";
+  import icon from "./D20.svg"
 ---
 
 <div
   class="m-auto flex h-dvh max-h-dvh flex-col overflow-y-clip px-4 landscape:px-8"
 >
   <header class="my-4">
-    <h1 class="text-lg landscape:text-2xl">RPG Campaign Generator</h1>
+    <h1 class="text-lg landscape:text-2xl">RPG Campaign Generator <img src={icon.src} class="inline-block h-[1em]" alt="" /></h1>
   </header>
   <main class="flex flex-1 flex-col gap-4 overflow-y-clip landscape:flex-row">
     <div class="flex flex-1 place-items-stretch overflow-y-clip">
