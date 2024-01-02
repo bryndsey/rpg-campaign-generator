@@ -3,11 +3,19 @@
 
   const devMode = import.meta.env.DEV;
 
+  let showCopiedAlert = false;
+
   async function copyStoryToClipboard(story: string) {
     try {
       await navigator.clipboard.writeText(story);
+
+      showCopiedAlert = true;
+      setTimeout(() => {
+        showCopiedAlert = false;
+      }, 5000);
     } catch (error) {
       console.log(error);
+      showCopiedAlert = false;
     }
   }
 </script>
@@ -61,4 +69,11 @@
       </div>
     {/if}
   </div>
+  {#if showCopiedAlert}
+    <div class="toast fixed">
+      <div class="alert">
+        <span>Copied to clipboard.</span>
+      </div>
+    </div>
+  {/if}
 </div>
