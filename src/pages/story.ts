@@ -1,12 +1,12 @@
-import type { APIContext, APIRoute } from "astro";
 import {
   GoogleGenerativeAI,
-  HarmCategory,
   HarmBlockThreshold,
+  HarmCategory,
 } from "@google/generative-ai";
+import type { APIRoute } from "astro";
+import { safeGetError } from "../safeGetError";
 import type { ResponseBody } from "../types/ResponseBody";
 import type { ResponseContent } from "../types/ResponseContent";
-import { safeGetError } from "../safeGetError";
 
 export const MAX_INPUT_CHARACTERS = 40;
 
@@ -149,7 +149,7 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
   };
 }
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ request }) => {
   const urlObj = new URL(request.url);
   let body: ResponseBody;
   const tone = urlObj.searchParams.get("tone") ?? undefined;

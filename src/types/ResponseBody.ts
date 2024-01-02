@@ -1,5 +1,5 @@
-import { zodResponseContent, type ResponseContent } from "./ResponseContent";
 import { z } from "zod";
+import { zodResponseContent } from "./ResponseContent";
 
 const zodResponseBody = z.discriminatedUnion("result", [
   z.object({
