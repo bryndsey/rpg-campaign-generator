@@ -2,10 +2,18 @@
   import { state } from "./stores/campaign";
 
   const devMode = import.meta.env.DEV;
+
+  async function copyStoryToClipboard(story: string) {
+    try {
+      await navigator.clipboard.writeText(story);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 </script>
 
 <div class="card w-full overflow-y-clip bg-base-content/5 max-lg:card-compact">
-  <div class="card-body overflow-y-auto">
+  <div class="card-body relative overflow-y-auto">
     {#if $state.state === "loading"}
       <div class="grid h-full place-content-center place-items-center gap-4">
         <h2>Crafting campaign ideas. Please wait...</h2>
@@ -29,8 +37,13 @@
           {/if}
         </div>
       {:else}
+        {@const story = $state.data.content.story}
+        <button
+          class="btn sticky top-0 self-end"
+          on:click={() => copyStoryToClipboard(story)}>Copy to clipboard</button
+        >
         <p class="m-auto max-w-prose whitespace-pre-line">
-          {$state.data.content.story}
+          {story}
         </p>
       {/if}
     {:else}
