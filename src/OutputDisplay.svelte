@@ -72,7 +72,7 @@
   {#if showCopiedAlert}
     <div class="toast fixed z-10">
       <div class="alert">
-        <span>Copied to clipboard.</span>
+        <span>Copied to clipboard</span>
       </div>
     </div>
   {/if}
