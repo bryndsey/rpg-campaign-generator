@@ -10,45 +10,47 @@
 </script>
 
 <div class={className}>
-  <h2 class="font-semibold landscape:text-lg">
-    Settings <span class="text-xs font-normal opacity-80">(optional)</span>
-  </h2>
-  <div class="flex flex-row gap-2 landscape:flex-col">
-    <label class="form-control w-full portrait:flex-1">
-      <div class="label">
-        <span class="label-text">Tone</span>
-      </div>
-      <select
-        class="select select-bordered portrait:select-sm"
-        disabled={$state.state === "loading"}
-        bind:value={$tone}
-      >
-        {#each tones as tone}
-          <option>{tone}</option>
-        {/each}
-      </select>
-    </label>
-
-    <label class="form-control portrait:flex-1">
-      <div class="label">
-        <span class="label-text">Topic</span>
-        <span class="label-text-alt"
-          >{`${$topic?.length ?? 0}/${MAX_INPUT_CHARACTERS}`}</span
+  <div class="flex h-full flex-col">
+    <h2 class="font-semibold landscape:text-lg">
+      Settings <span class="text-xs font-normal opacity-80">(optional)</span>
+    </h2>
+    <div class="flex flex-row gap-2 landscape:flex-1 landscape:flex-col">
+      <label class="form-control w-full portrait:flex-1">
+        <div class="label">
+          <span class="label-text">Tone</span>
+        </div>
+        <select
+          class="select select-bordered portrait:select-sm"
+          disabled={$state.state === "loading"}
+          bind:value={$tone}
         >
-      </div>
-      <input
-        bind:value={$topic}
-        type="text"
-        class="input input-bordered max-w-prose portrait:input-sm placeholder:opacity-60"
-        disabled={$state.state === "loading"}
-        maxlength={MAX_INPUT_CHARACTERS}
-        placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
-      />
-    </label>
+          {#each tones as tone}
+            <option>{tone}</option>
+          {/each}
+        </select>
+      </label>
+
+      <label class="form-control portrait:flex-1">
+        <div class="label">
+          <span class="label-text">Topic</span>
+          <span class="label-text-alt"
+            >{`${$topic?.length ?? 0}/${MAX_INPUT_CHARACTERS}`}</span
+          >
+        </div>
+        <input
+          bind:value={$topic}
+          type="text"
+          class="input input-bordered max-w-prose portrait:input-sm placeholder:opacity-60"
+          disabled={$state.state === "loading"}
+          maxlength={MAX_INPUT_CHARACTERS}
+          placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
+        />
+      </label>
+    </div>
+    <button
+      class="btn mt-4 w-full [@media(prefers-color-scheme:light)]:btn-secondary"
+      on:click={fetchStory}
+      disabled={$state.state === "loading"}>Generate</button
+    >
   </div>
-  <button
-    class="btn mt-4 w-full [@media(prefers-color-scheme:light)]:btn-secondary"
-    on:click={fetchStory}
-    disabled={$state.state === "loading"}>Submit</button
-  >
 </div>
