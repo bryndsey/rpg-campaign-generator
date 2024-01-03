@@ -47,7 +47,7 @@
       {:else}
         {@const story = $state.data.content.story}
         <button
-          class="btn sticky top-0 self-end"
+          class="btn btn-xs sticky top-0 self-end"
           on:click={() => copyStoryToClipboard(story)}>Copy to clipboard</button
         >
         <p class="m-auto max-w-prose whitespace-pre-line">
