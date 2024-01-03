@@ -20,8 +20,8 @@
     <p class="py-4">
       RPG Campaign Generator is meant to be used merely as a source of
       inspriation, and makes no copyright claims or warranties on the content
-      generated. The content may not be entirely original or appropriate. Use at
-      your own risk, and please use responsibly.
+      generated. The content may not be original or appropriate. Use at your own
+      risk, and please use responsibly.
     </p>
   </div>
   <form method="dialog" class="modal-backdrop">
