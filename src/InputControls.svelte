@@ -10,6 +10,9 @@
 </script>
 
 <div class={className}>
+  <h2 class="font-semibold landscape:text-lg">
+    Settings <span class="text-xs font-normal opacity-80">(optional)</span>
+  </h2>
   <div class="flex flex-row gap-2 landscape:flex-col">
     <label class="form-control w-full portrait:flex-1">
       <div class="label">
