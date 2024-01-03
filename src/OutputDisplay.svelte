@@ -56,16 +56,12 @@
       {/if}
     {:else}
       <div
-        class="m-auto grid h-full max-w-prose place-content-center gap-2 text-center"
+        class="m-auto grid h-full max-w-prose place-content-center gap-2 p-4 text-center"
       >
-        <h2 class="text-2xl">Welcome to RPG Gampaign Creator</h2>
-        <p>
-          This tool can help generate ideas for your next RPG campaign using AI.
-        </p>
-        <p>
-          If you want to customize the campaign the AI creates, use the settings
-          to tell the tool what you're looking for.
-        </p>
+        <h2 class="text-balance text-3xl font-semibold">
+          Welcome to RPG Gampaign Creator
+        </h2>
+        <p class="mt-4">Use AI to generate ideas for your next RPG campaign.</p>
       </div>
     {/if}
   </div>
