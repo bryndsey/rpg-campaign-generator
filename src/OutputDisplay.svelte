@@ -61,7 +61,9 @@
         <h2 class="text-balance text-3xl font-semibold">
           Welcome to RPG Gampaign Creator
         </h2>
-        <p class="mt-4">Use AI to generate ideas for your next RPG campaign.</p>
+        <h3 class="mt-4 text-balance">
+          Use AI to generate ideas for your next RPG campaign
+        </h3>
       </div>
     {/if}
   </div>
