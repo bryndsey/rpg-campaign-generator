@@ -48,7 +48,7 @@
       </label>
     </div>
     <button
-      class="btn mt-4 w-full [@media(prefers-color-scheme:light)]:btn-secondary"
+      class="btn btn-secondary mt-4 w-full"
       on:click={fetchStory}
       disabled={$state.state === "loading"}>Generate</button
     >
