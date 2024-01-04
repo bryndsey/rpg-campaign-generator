@@ -21,11 +21,13 @@
     "chance": "^1.1.11",
     "nanostores": "^0.9.5",
     "svelte": "^4.2.8",
+    "svelte-exmarkdown": "^3.0.2",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "daisyui": "^4.4.24",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",

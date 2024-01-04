@@ -1,5 +1,6 @@
 <script lang="ts">
   import { state } from "./stores/campaign";
+  import Markdown from "svelte-exmarkdown";
 
   const devMode = import.meta.env.DEV;
 
@@ -50,9 +51,9 @@
           class="btn btn-xs sticky top-0 self-end"
           on:click={() => copyStoryToClipboard(story)}>Copy to clipboard</button
         >
-        <p class="m-auto max-w-prose whitespace-pre-line">
-          {story}
-        </p>
+        <div class="prose m-auto max-w-prose">
+          <Markdown md={story} />
+        </div>
       {/if}
     {:else}
       <div
