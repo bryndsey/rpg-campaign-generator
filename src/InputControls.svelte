@@ -14,7 +14,9 @@
     <h2 class="font-semibold landscape:text-lg">
       Settings <span class="text-xs font-normal opacity-80">(optional)</span>
     </h2>
-    <div class="flex flex-row gap-2 landscape:flex-1 landscape:flex-col">
+    <div
+      class="flex flex-row gap-2 portrait:flex-wrap landscape:flex-1 landscape:flex-col"
+    >
       <label class="form-control w-full portrait:flex-1">
         <div class="label">
           <span class="label-text">Tone</span>
