@@ -5,12 +5,12 @@
   import { tones } from "./types/tones";
 </script>
 
-<div class="flex h-full flex-col overflow-y-auto landscape:md:gap-4">
+<div class="flex h-full flex-col overflow-clip landscape:md:gap-4">
   <h2 class="font-semibold landscape:text-lg">
     Settings <span class="text-xs font-normal opacity-80">(optional)</span>
   </h2>
   <div
-    class="flex flex-row gap-2 portrait:flex-wrap landscape:flex-1 landscape:flex-col landscape:md:gap-4"
+    class="flex flex-row gap-2 overflow-y-auto portrait:flex-wrap landscape:flex-1 landscape:flex-col landscape:md:gap-4"
   >
     <label class="form-control w-full portrait:flex-1">
       <div class="label">
