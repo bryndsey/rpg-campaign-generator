@@ -17,7 +17,7 @@
         <span class="label-text">Tone</span>
       </div>
       <select
-        class="select select-bordered portrait:select-sm"
+        class="select select-bordered select-sm landscape:md:select-md"
         disabled={$state.state === "loading"}
         bind:value={$tone}
       >
@@ -37,7 +37,7 @@
       <input
         bind:value={$topic}
         type="text"
-        class="input input-bordered max-w-prose portrait:input-sm placeholder:opacity-60"
+        class="input input-bordered select-sm max-w-prose landscape:md:select-md placeholder:opacity-60"
         disabled={$state.state === "loading"}
         maxlength={MAX_INPUT_CHARACTERS}
         placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
