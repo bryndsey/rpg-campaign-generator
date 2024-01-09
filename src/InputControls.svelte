@@ -18,7 +18,7 @@
       >
         <label class="form-control w-full portrait:flex-1">
           <div class="label">
-            <span class="label-text">Tone</span>
+            <span class="label-text text-xs md:text-sm">Tone</span>
           </div>
           <select
             class="select select-bordered select-sm landscape:md:select-md"
@@ -33,8 +33,8 @@
 
         <label class="form-control portrait:flex-1">
           <div class="label">
-            <span class="label-text">Topic</span>
-            <span class="label-text-alt"
+            <span class="label-text text-xs md:text-sm">Topic</span>
+            <span class="label-text-alt text-xs md:text-sm"
               >{`${$topic?.length ?? 0}/${MAX_INPUT_CHARACTERS}`}</span
             >
           </div>
