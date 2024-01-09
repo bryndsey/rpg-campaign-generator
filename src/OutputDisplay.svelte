@@ -1,5 +1,6 @@
 <script lang="ts">
   import { state } from "./stores/campaign";
+  import { appName } from "./constants";
   import Markdown from "svelte-exmarkdown";
 
   const devMode = import.meta.env.DEV;
@@ -62,7 +63,7 @@
         class="m-auto grid h-full max-w-prose place-content-center gap-2 p-4 text-center"
       >
         <h2 class="text-balance text-xl font-semibold md:text-3xl">
-          Welcome to RPG Gampaign Creator
+          {`Welcome to ${appName}`}
         </h2>
         <h3 class="mt-4 text-balance text-sm md:text-base">
           Use AI to generate ideas for your next RPG campaign

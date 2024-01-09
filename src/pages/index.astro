@@ -1,8 +1,9 @@
 ---
 import StoryGenerator from "../StoryGenerator.astro";
+import { appName } from "../constants";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="RPG Campaign Generator">
+<Layout title={appName}>
   <StoryGenerator />
 </Layout>
