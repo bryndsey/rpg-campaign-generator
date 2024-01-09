@@ -9,7 +9,7 @@
   <div
     class="card card-compact overflow-y-auto border-2 border-base-content/5 landscape:flex-1"
   >
-    <div class="card-body">
+    <form id="settings" class="card-body">
       <h2 class="font-semibold landscape:text-lg">
         Settings <span class="text-xs font-normal opacity-80">(optional)</span>
       </h2>
@@ -48,9 +48,11 @@
           />
         </label>
       </div>
-    </div>
+    </form>
   </div>
   <button
+    type="submit"
+    form="settings"
     class="btn btn-secondary w-full"
     on:click={fetchStory}
     disabled={$state.state === "loading"}>Generate</button
