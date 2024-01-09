@@ -108,7 +108,7 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
 
   const tonePromptText = tone ? ` The tone of the campaign is "${tone}".` : "";
   const topicPromptText = topic
-    ? ` The topic of the campaign is "${topic}".`
+    ? ` The campaign story includes the topic "${topic}".`
     : "";
 
   const storyPromptText = `You are a creative game master planning a role-playing game campaign.${topicPromptText}${tonePromptText} Describe the plot of this campaign story in plain text.`;
