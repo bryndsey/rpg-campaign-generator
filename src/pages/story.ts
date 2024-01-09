@@ -56,62 +56,62 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
     },
   ];
 
-  const themePromptParts = [
-    {
-      text: "You are a creative writer. Given an optional input of tone and topic, describe in a few words a compelling theme or topic for a story that would fit the tone and topic.",
-    },
-    { text: "tone: Tragic" },
-    { text: "topic: " },
-    { text: "out: Forbidden love that leads to death." },
-    { text: "tone: " },
-    { text: "topic: Technology" },
-    { text: "out: The struggle between technology and nature." },
-    { text: "tone: " },
-    { text: "topic: Green" },
-    { text: "out: Discovering the unexpected beauty of nature." },
-    { text: "tone: Uplifting" },
-    { text: "topic: Platypus" },
-    { text: "out: Overcoming differences to find one's place in the world." },
-    { text: "tone: " },
-    { text: "topic: " },
-    { text: "out: A hero's journey for justice." },
-    { text: "tone: Serious" },
-    { text: "topic: Green, politics" },
-    { text: "out: The staggering cost of capitalism on the individual." },
-    { text: `tone: ${tone}` },
-    { text: `topic: ${topic}` },
-    { text: "output: " },
-  ];
+  // const themePromptParts = [
+  //   {
+  //     text: "You are a creative writer. Given an optional input of tone and topic, describe in a few words a compelling theme or topic for a story that would fit the tone and topic.",
+  //   },
+  //   { text: "tone: Tragic" },
+  //   { text: "topic: " },
+  //   { text: "out: Forbidden love that leads to death." },
+  //   { text: "tone: " },
+  //   { text: "topic: Technology" },
+  //   { text: "out: The struggle between technology and nature." },
+  //   { text: "tone: " },
+  //   { text: "topic: Green" },
+  //   { text: "out: Discovering the unexpected beauty of nature." },
+  //   { text: "tone: Uplifting" },
+  //   { text: "topic: Platypus" },
+  //   { text: "out: Overcoming differences to find one's place in the world." },
+  //   { text: "tone: " },
+  //   { text: "topic: " },
+  //   { text: "out: A hero's journey for justice." },
+  //   { text: "tone: Serious" },
+  //   { text: "topic: Green, politics" },
+  //   { text: "out: The staggering cost of capitalism on the individual." },
+  //   { text: `tone: ${tone}` },
+  //   { text: `topic: ${topic}` },
+  //   { text: "output: " },
+  // ];
 
-  const themeResult = await model.generateContent({
-    contents: [{ role: "user", parts: themePromptParts }],
-    generationConfig,
-    safetySettings,
-  });
+  // const themeResult = await model.generateContent({
+  //   contents: [{ role: "user", parts: themePromptParts }],
+  //   generationConfig,
+  //   safetySettings,
+  // });
 
-  const themeResponse = themeResult.response;
-  const themePromptFeedback = themeResponse.promptFeedback;
-  if (
-    themePromptFeedback !== undefined &&
-    themePromptFeedback.blockReason !== undefined
-  ) {
-    throw new Error(
-      `The prompt was blocked due to ${themePromptFeedback.blockReason.toLocaleLowerCase()}. You may need to modify your prompt to reduce the chances of blocked content.${
-        themePromptFeedback.blockReasonMessage
-          ? ` Message: ${themePromptFeedback.blockReasonMessage}`
-          : ""
-      }`,
-      { cause: "SAFETY" },
-    );
-  }
-  const themeText = themeResponse.text();
+  // const themeResponse = themeResult.response;
+  // const themePromptFeedback = themeResponse.promptFeedback;
+  // if (
+  //   themePromptFeedback !== undefined &&
+  //   themePromptFeedback.blockReason !== undefined
+  // ) {
+  //   throw new Error(
+  //     `The prompt was blocked due to ${themePromptFeedback.blockReason.toLocaleLowerCase()}. You may need to modify your prompt to reduce the chances of blocked content.${
+  //       themePromptFeedback.blockReasonMessage
+  //         ? ` Message: ${themePromptFeedback.blockReasonMessage}`
+  //         : ""
+  //     }`,
+  //     { cause: "SAFETY" },
+  //   );
+  // }
+  // const themeText = themeResponse.text();
 
   const tonePromptText = tone ? ` The tone of the campaign is "${tone}".` : "";
   const topicPromptText = topic
     ? ` The topic of the campaign is "${topic}".`
     : "";
 
-  const storyPromptText = `You are a creative dungeon master planning out a role-playing game campaign with a theme of "${themeText}".${topicPromptText}${tonePromptText} Describe the plot of this campaign story.`;
+  const storyPromptText = `You are a creative game master planning a role-playing game campaign.${topicPromptText}${tonePromptText} Describe the plot of this campaign story in plain text.`;
 
   // console.log(storyPromptText);
   const storyPromptParts = [
@@ -145,7 +145,7 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
   // console.log(response.text());
   return {
     story: storyResponse.text(),
-    theme: themeText,
+    theme: "",
   };
 }
 
