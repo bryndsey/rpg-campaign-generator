@@ -44,7 +44,7 @@
             class="input input-bordered select-sm max-w-prose landscape:md:select-md placeholder:opacity-60"
             disabled={$state.state === "loading"}
             maxlength={MAX_INPUT_CHARACTERS}
-            placeholder="e.g. 'Dragon', 'Yellow', 'Tuesday', etc."
+            placeholder="Enter a word or phrase"
           />
         </label>
       </div>
