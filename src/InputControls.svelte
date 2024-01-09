@@ -5,7 +5,7 @@
   import { tones } from "./types/tones";
 </script>
 
-<div class="flex h-full flex-col overflow-clip landscape:md:gap-4">
+<div class="flex h-full flex-col gap-2 overflow-clip landscape:md:gap-4">
   <div
     class="card card-compact overflow-y-auto border-2 border-base-content/5 landscape:flex-1"
   >
@@ -51,7 +51,7 @@
     </div>
   </div>
   <button
-    class="btn btn-secondary mt-4 w-full"
+    class="btn btn-secondary w-full"
     on:click={fetchStory}
     disabled={$state.state === "loading"}>Generate</button
   >
