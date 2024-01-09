@@ -24,16 +24,18 @@
 <div class="card w-full overflow-y-clip bg-base-content/5 max-lg:card-compact">
   <div class="card-body relative overflow-y-auto">
     {#if $state.state === "loading"}
-      <div class="grid h-full place-content-center place-items-center gap-4">
+      <div
+        class="grid h-full place-content-center place-items-center gap-4 text-sm md:text-base"
+      >
         <h2>Crafting campaign ideas. Please wait...</h2>
         <span class="loading loading-spinner"></span>
       </div>
     {:else if $state.state === "data"}
       {#if $state.data.result === "error"}
         <div
-          class="grid h-full place-content-center place-items-center gap-4 text-balance text-center"
+          class="grid h-full place-content-center place-items-center gap-2 text-balance text-center md:gap-4"
         >
-          <h2 class="text-2xl">Looks like we rolled a Nat 1...</h2>
+          <h2 class="text-lg md:text-2xl">Looks like we rolled a Nat 1...</h2>
           {#if $state.data.errorCause === "INVALID INPUT" || $state.data.errorCause === "SAFETY"}
             <p class="m-auto max-w-prose">{$state.data.errorMessage}</p>
           {:else}
@@ -51,7 +53,7 @@
           class="btn btn-xs sticky top-0 self-end"
           on:click={() => copyStoryToClipboard(story)}>Copy to clipboard</button
         >
-        <div class="prose m-auto max-w-prose">
+        <div class="prose m-auto max-w-prose text-sm md:text-base">
           <Markdown md={story} />
         </div>
       {/if}
@@ -59,10 +61,10 @@
       <div
         class="m-auto grid h-full max-w-prose place-content-center gap-2 p-4 text-center"
       >
-        <h2 class="text-balance text-3xl font-semibold">
+        <h2 class="text-balance text-xl font-semibold md:text-3xl">
           Welcome to RPG Gampaign Creator
         </h2>
-        <h3 class="mt-4 text-balance">
+        <h3 class="mt-4 text-balance text-sm md:text-base">
           Use AI to generate ideas for your next RPG campaign
         </h3>
       </div>
