@@ -19,6 +19,7 @@
     "aimless.js": "^1.0.4",
     "astro": "^4.1.0",
     "chance": "^1.1.11",
+    "lucide-svelte": "^0.309.0",
     "nanostores": "^0.9.5",
     "svelte": "^4.2.8",
     "svelte-exmarkdown": "^3.0.2",

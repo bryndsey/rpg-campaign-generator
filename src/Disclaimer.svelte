@@ -1,13 +1,16 @@
 <script lang="ts">
   import { appName } from "./constants";
+  import { Info } from "lucide-svelte";
 
   let dialogElement: HTMLDialogElement;
 </script>
 
 <button
   class="link-hover link text-xs opacity-70 hover:opacity-100"
-  on:click={() => dialogElement.showModal()}>Disclaimer</button
+  on:click={() => dialogElement.showModal()}
 >
+  <Info size={"1.5em"} />
+</button>
 <dialog id="my_modal_3" class="modal" bind:this={dialogElement}>
   <div class="modal-box">
     <form method="dialog">
