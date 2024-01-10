@@ -1,7 +1,8 @@
 <script lang="ts">
   import { fetchStory } from "./network/fetchStory";
   import { MAX_INPUT_CHARACTERS } from "./pages/story";
-  import { state, tone, topic } from "./stores/campaign";
+  import { setting, state, tone, topic } from "./stores/campaign";
+  import { settings } from "./types/settings";
   import { tones } from "./types/tones";
 </script>
 
@@ -27,6 +28,21 @@
           >
             {#each tones as tone}
               <option>{tone}</option>
+            {/each}
+          </select>
+        </label>
+
+        <label class="form-control portrait:flex-1">
+          <div class="label">
+            <span class="label-text text-xs md:text-sm">Setting</span>
+          </div>
+          <select
+            class="select select-bordered select-sm landscape:md:select-md"
+            disabled={$state.state === "loading"}
+            bind:value={$setting}
+          >
+            {#each settings as setting}
+              <option>{setting}</option>
             {/each}
           </select>
         </label>
