@@ -6,10 +6,10 @@
 </script>
 
 <button
-  class="link-hover link text-xs opacity-70 hover:opacity-100"
+  class="btn btn-circle btn-ghost btn-sm opacity-70 hover:opacity-100"
   on:click={() => dialogElement.showModal()}
 >
-  <Info size={"1.5em"} />
+  <Info size={"1.25em"} />
 </button>
 <dialog id="my_modal_3" class="modal" bind:this={dialogElement}>
   <div class="modal-box">
