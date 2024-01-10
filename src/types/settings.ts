@@ -1,0 +1,27 @@
+export const settings = [
+  "Unspecified",
+  "Fantasy",
+  "High Fantasy",
+  "Medieval",
+  "Sci-fi",
+  "Space",
+  "Cyberpunk",
+  "Steampunk",
+  "Noir",
+  "Wild West",
+  "Eldritch",
+  "Pirate",
+  "Superhero",
+  "Post-apocalypse",
+  "Zombie",
+  "Underwater",
+  "Desert",
+  "Ancient",
+  "Future",
+  "Dystopian",
+  "Modern",
+  "Retro",
+  "Gangster",
+] as const;
+
+export type Setting = (typeof settings)[number];
