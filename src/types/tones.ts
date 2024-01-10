@@ -25,6 +25,7 @@ export const tones = [
   "Puzzling",
   "Quirky",
   "Sardonic",
+  "Satirical",
   "Sensual",
   "Silly",
   "Surreal",
