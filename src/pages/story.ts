@@ -118,7 +118,11 @@ async function run(
     ? ` The campaign takes place in a(n) ${setting} setting.`
     : "";
 
-  const storyPromptText = `You are a creative game master planning a role-playing game campaign.${settingPromptText}${topicPromptText}${tonePromptText} Describe the plot of this campaign story in plain text.`;
+  const storyPromptText = `You are a creative game master planning a role-playing game campaign.
+  ${settingPromptText}
+  ${topicPromptText}
+  ${tonePromptText} 
+  Describe the plot of this campaign story in plain text.`;
 
   // console.log(storyPromptText);
   const storyPromptParts = [
