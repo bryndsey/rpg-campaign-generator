@@ -20,7 +20,6 @@ export const settings = [
   "Future",
   "Dystopian",
   "Modern",
-  "Retro",
   "Gangster",
 ] as const;
 
