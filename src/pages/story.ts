@@ -13,7 +13,11 @@ export const MAX_INPUT_CHARACTERS = 40;
 const MODEL_NAME = "gemini-pro";
 const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 
-async function run(tone?: string, topic?: string): Promise<ResponseContent> {
+async function run(
+  tone?: string,
+  topic?: string,
+  setting?: string,
+): Promise<ResponseContent> {
   if (tone && tone.length > MAX_INPUT_CHARACTERS) {
     throw new Error(
       `Your tone is too long. Please limit input to ${MAX_INPUT_CHARACTERS} characters`,
@@ -110,8 +114,11 @@ async function run(tone?: string, topic?: string): Promise<ResponseContent> {
   const topicPromptText = topic
     ? ` The campaign story includes the topic "${topic}".`
     : "";
+  const settingPromptText = setting
+    ? ` The campaign takes place in a(n) ${setting} setting.`
+    : "";
 
-  const storyPromptText = `You are a creative game master planning a role-playing game campaign.${topicPromptText}${tonePromptText} Describe the plot of this campaign story in plain text.`;
+  const storyPromptText = `You are a creative game master planning a role-playing game campaign.${settingPromptText}${topicPromptText}${tonePromptText} Describe the plot of this campaign story in plain text.`;
 
   // console.log(storyPromptText);
   const storyPromptParts = [
@@ -154,8 +161,9 @@ export const GET: APIRoute = async ({ request }) => {
   let body: ResponseBody;
   const tone = urlObj.searchParams.get("tone") ?? undefined;
   const topic = urlObj.searchParams.get("topic") ?? undefined;
+  const setting = urlObj.searchParams.get("setting") ?? undefined;
   try {
-    const content = await run(tone, topic);
+    const content = await run(tone, topic, setting);
     body = {
       result: "success",
       content,

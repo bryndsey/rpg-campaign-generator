@@ -1,5 +1,5 @@
 import { safeGetError } from "../safeGetError";
-import { tone, topic, state } from "../stores/campaign";
+import { tone, topic, state, setting } from "../stores/campaign";
 import { validateResponseBody, type ResponseBody } from "../types/ResponseBody";
 
 export const fetchStory = async () => {
@@ -10,10 +10,17 @@ export const fetchStory = async () => {
     if ($tone !== "Unspecified") {
       queryParams.append("tone", $tone);
     }
+
     const $topic = topic.get();
     if ($topic) {
       queryParams.append("topic", $topic);
     }
+
+    const $setting = setting.get();
+    if ($setting !== "Unspecified") {
+      queryParams.append("setting", $setting);
+    }
+
     const fetchResult = await fetch(`./story?${queryParams.toString()}`).then(
       (x) => x.json(),
     );
