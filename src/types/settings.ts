@@ -1,7 +1,6 @@
 export const settings = [
   "Unspecified",
   "Fantasy",
-  "High Fantasy",
   "Medieval",
   "Sci-fi",
   "Space",
