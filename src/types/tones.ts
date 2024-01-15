@@ -1,5 +1,5 @@
 export const tones = [
-  "Unspecified",
+  "-",
   "Adventurous",
   "Ambiguous",
   "Cheerful",

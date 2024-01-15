@@ -7,7 +7,7 @@ export const fetchStory = async () => {
   try {
     const queryParams = new URLSearchParams();
     const $tone = tone.get();
-    if ($tone !== "Unspecified") {
+    if ($tone !== "-") {
       queryParams.append("tone", $tone);
     }
 
@@ -17,7 +17,7 @@ export const fetchStory = async () => {
     }
 
     const $setting = setting.get();
-    if ($setting !== "Unspecified") {
+    if ($setting !== "-") {
       queryParams.append("setting", $setting);
     }
 

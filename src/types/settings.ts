@@ -1,5 +1,5 @@
 export const settings = [
-  "Unspecified",
+  "-",
   "Fantasy",
   "Medieval",
   "Sci-fi",
