@@ -25,6 +25,7 @@
             class="select select-bordered select-sm landscape:md:select-md"
             disabled={$state.state === "loading"}
             bind:value={$tone}
+            id="tone-input"
           >
             {#each tones as tone}
               <option>{tone}</option>
@@ -40,6 +41,7 @@
             class="select select-bordered select-sm landscape:md:select-md"
             disabled={$state.state === "loading"}
             bind:value={$setting}
+            id="setting-input"
           >
             {#each settings as setting}
               <option>{setting}</option>
@@ -61,6 +63,7 @@
             disabled={$state.state === "loading"}
             maxlength={MAX_INPUT_CHARACTERS}
             placeholder="Enter a word or phrase"
+            id="topic-input"
           />
         </label>
       </div>
