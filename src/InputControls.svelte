@@ -12,7 +12,7 @@
   >
     <form id="settings" class="card-body">
       <h2 class="font-semibold landscape:text-lg">
-        Settings <span class="text-xs font-normal opacity-80">(optional)</span>
+        Customize <span class="text-xs font-normal opacity-80">(optional)</span>
       </h2>
       <div
         class="flex flex-row gap-2 portrait:flex-wrap landscape:flex-col landscape:md:gap-4"
