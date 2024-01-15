@@ -11,9 +11,9 @@
     class="card card-compact overflow-y-auto border-2 border-base-content/5 landscape:flex-1"
   >
     <form id="settings" class="card-body">
-      <h2 class="font-semibold landscape:text-lg">
+      <legend class="font-semibold landscape:text-lg">
         Customize <span class="text-xs font-normal opacity-80">(optional)</span>
-      </h2>
+      </legend>
       <div
         class="flex flex-row gap-2 portrait:flex-wrap landscape:flex-col landscape:md:gap-4"
       >
