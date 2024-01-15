@@ -7,6 +7,7 @@
 
 <button
   class="btn btn-circle btn-ghost btn-sm opacity-70 hover:opacity-100"
+  aria-label="info"
   on:click={() => dialogElement.showModal()}
 >
   <Info size={"1.25em"} />
