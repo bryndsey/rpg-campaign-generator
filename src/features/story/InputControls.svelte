@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { fetchStory } from "./network/fetchStory";
-  import { MAX_INPUT_CHARACTERS } from "./pages/story";
-  import { setting, state, tone, topic } from "./stores/campaign";
-  import { settings } from "./types/settings";
-  import { tones } from "./types/tones";
+  import { fetchStory } from "@/network/fetchStory";
+  import { MAX_INPUT_CHARACTERS } from "@/pages/story";
+  import { setting, state, tone, topic } from "@/stores/campaign";
+  import { settings } from "@/types/settings";
+  import { tones } from "@/types/tones";
 </script>
 
 <div class="flex h-full flex-col gap-2 overflow-clip landscape:md:gap-4">

@@ -1,9 +1,10 @@
 ---
+import "./story.css"
   import OutputDisplay from "./OutputDisplay.svelte";
   import InputControls from "./InputControls.svelte";
   import Disclaimer from "./Disclaimer.svelte";
-  import icon from "./D20.svg"
-import { appName } from "./constants";
+  import icon from "@/D20.svg"
+import { appName } from "../../constants";
 ---
 
 <div
@@ -20,5 +21,5 @@ import { appName } from "./constants";
     <div class="w-full landscape:max-w-64 landscape:lg:max-w-xs overflow-y-clip">
       <InputControls client:load />
     </div>
-  </main>
+  </main>c
 </div>
