@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { state } from "@/stores/campaign";
+  import { state } from "@/features/story/stores/campaign";
   import { appName } from "@/constants";
   import Markdown from "svelte-exmarkdown";
 

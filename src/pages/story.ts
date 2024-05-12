@@ -5,8 +5,8 @@ import {
 } from "@google/generative-ai";
 import type { APIRoute } from "astro";
 import { safeGetError } from "../safeGetError";
-import type { ResponseBody } from "../types/ResponseBody";
-import type { ResponseContent } from "../types/ResponseContent";
+import type { ResponseBody } from "../features/story/types/ResponseBody";
+import type { ResponseContent } from "../features/story/types/ResponseContent";
 
 export const MAX_INPUT_CHARACTERS = 40;
 
