@@ -2,8 +2,9 @@
 import "../global.css";
 import { appName } from "../constants";
 import Layout from "../layouts/Layout.astro";
+import CharacterPage from "@/features/character/CharacterPage";
 ---
 
 <Layout title={appName}>
-  <h1>Foo</h1>
+  <CharacterPage client:only="react" />
 </Layout>
