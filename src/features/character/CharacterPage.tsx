@@ -45,53 +45,9 @@ export default function Component() {
                   Configure the settings for the model and messages.
                 </DrawerDescription> */}
               </DrawerHeader>
-              <form className="grid w-full items-start gap-6 overflow-auto p-4 pt-0">
-                <fieldset className="grid gap-6 rounded-lg border p-4">
-                  <legend className="-ml-1 px-1 text-sm font-medium">
-                    Settings
-                  </legend>
-                  <div className="grid gap-3">
-                    <Label htmlFor="genre">Genre</Label>
-                    <Select>
-                      <SelectTrigger
-                        className="items-start [&_[data-description]]:hidden"
-                        id="genre"
-                      >
-                        <SelectValue placeholder="Select a genre" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="fantasy">Fantasy</SelectItem>
-                        <SelectItem value="sci-fi">Sci-Fi</SelectItem>
-                        <SelectItem value="horror">Horror</SelectItem>
-                        <SelectItem value="historical">Historical</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-3">
-                    <Label htmlFor="tone">Tone</Label>
-                    <Select>
-                      <SelectTrigger
-                        className="items-start [&_[data-description]]:hidden"
-                        id="tone"
-                      >
-                        <SelectValue placeholder="Select a tone" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="serious">Serious</SelectItem>
-                        <SelectItem value="light-hearted">
-                          Light-hearted
-                        </SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="epic">Epic</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-3">
-                    <Label htmlFor="topic">Topic</Label>
-                    <Input id="topic" placeholder="Enter a topic" />
-                  </div>
-                </fieldset>
-              </form>
+              <div className="w-full overflow-auto p-4 pt-0">
+                <InputControls />
+              </div>
             </DrawerContent>
           </Drawer>
           <Button
@@ -105,53 +61,7 @@ export default function Component() {
         </header>
         <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative hidden flex-col items-start gap-8 md:flex">
-            <form className="grid w-full items-start gap-6">
-              <fieldset className="grid gap-6 rounded-lg border p-4">
-                <legend className="-ml-1 px-1 text-sm font-medium">
-                  Settings
-                </legend>
-                <div className="grid gap-3">
-                  <Label htmlFor="genre">Genre</Label>
-                  <Select>
-                    <SelectTrigger
-                      className="items-start [&_[data-description]]:hidden"
-                      id="genre"
-                    >
-                      <SelectValue placeholder="Select a genre" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="fantasy">Fantasy</SelectItem>
-                      <SelectItem value="sci-fi">Sci-Fi</SelectItem>
-                      <SelectItem value="horror">Horror</SelectItem>
-                      <SelectItem value="historical">Historical</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="tone">Tone</Label>
-                  <Select>
-                    <SelectTrigger
-                      className="items-start [&_[data-description]]:hidden"
-                      id="tone"
-                    >
-                      <SelectValue placeholder="Select a tone" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="serious">Serious</SelectItem>
-                      <SelectItem value="light-hearted">
-                        Light-hearted
-                      </SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="epic">Epic</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="topic">Topic</Label>
-                  <Input id="topic" placeholder="Enter a topic" />
-                </div>
-              </fieldset>
-            </form>
+            <InputControls />
           </div>
           <div className="bg-muted/50 relative flex h-full min-h-[50vh] flex-col rounded-xl p-4 lg:col-span-2">
             <Badge className="absolute right-3 top-3" variant="outline">
@@ -165,6 +75,54 @@ export default function Component() {
         </main>
       </div>
     </div>
+  );
+}
+
+function InputControls() {
+  return (
+    <form className="grid w-full items-start gap-6">
+      <fieldset className="grid gap-6 rounded-lg border p-4">
+        <legend className="-ml-1 px-1 text-sm font-medium">Settings</legend>
+        <div className="grid gap-3">
+          <Label htmlFor="genre">Genre</Label>
+          <Select>
+            <SelectTrigger
+              className="items-start [&_[data-description]]:hidden"
+              id="genre"
+            >
+              <SelectValue placeholder="Select a genre" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="fantasy">Fantasy</SelectItem>
+              <SelectItem value="sci-fi">Sci-Fi</SelectItem>
+              <SelectItem value="horror">Horror</SelectItem>
+              <SelectItem value="historical">Historical</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="grid gap-3">
+          <Label htmlFor="tone">Tone</Label>
+          <Select>
+            <SelectTrigger
+              className="items-start [&_[data-description]]:hidden"
+              id="tone"
+            >
+              <SelectValue placeholder="Select a tone" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="serious">Serious</SelectItem>
+              <SelectItem value="light-hearted">Light-hearted</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="epic">Epic</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="grid gap-3">
+          <Label htmlFor="topic">Topic</Label>
+          <Input id="topic" placeholder="Enter a topic" />
+        </div>
+      </fieldset>
+    </form>
   );
 }
 
