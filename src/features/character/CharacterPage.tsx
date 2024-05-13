@@ -30,7 +30,7 @@ export default function Component() {
     <div key="1" className="grid h-screen w-full">
       <div className="flex flex-col">
         <header className="bg-background sticky top-0 z-10 flex h-[53px] items-center gap-1 border-b px-4">
-          <h1 className="text-xl font-semibold">Playground</h1>
+          <h1 className="text-xl font-semibold">Character Creator</h1>
           <Drawer>
             <DrawerTrigger asChild>
               <Button className="md:hidden" size="icon" variant="ghost">
@@ -40,15 +40,15 @@ export default function Component() {
             </DrawerTrigger>
             <DrawerContent className="max-h-[80vh]">
               <DrawerHeader>
-                <DrawerTitle>Configuration</DrawerTitle>
-                <DrawerDescription>
+                <DrawerTitle>Character Settings</DrawerTitle>
+                {/* <DrawerDescription>
                   Configure the settings for the model and messages.
-                </DrawerDescription>
+                </DrawerDescription> */}
               </DrawerHeader>
               <form className="grid w-full items-start gap-6 overflow-auto p-4 pt-0">
                 <fieldset className="grid gap-6 rounded-lg border p-4">
                   <legend className="-ml-1 px-1 text-sm font-medium">
-                    RPG Campaign Settings
+                    Settings
                   </legend>
                   <div className="grid gap-3">
                     <Label htmlFor="genre">Genre</Label>
@@ -108,7 +108,7 @@ export default function Component() {
             <form className="grid w-full items-start gap-6">
               <fieldset className="grid gap-6 rounded-lg border p-4">
                 <legend className="-ml-1 px-1 text-sm font-medium">
-                  RPG Campaign Settings
+                  Settings
                 </legend>
                 <div className="grid gap-3">
                   <Label htmlFor="genre">Genre</Label>
