@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import type { SVGProps } from "react";
 import type { JSX } from "react/jsx-runtime";
+import { characterClasses, characterRaces } from "./characterData";
 
 export default function Component() {
   return (
@@ -84,42 +85,51 @@ function InputControls() {
       <fieldset className="grid gap-6 rounded-lg border p-4">
         <legend className="-ml-1 px-1 text-sm font-medium">Settings</legend>
         <div className="grid gap-3">
-          <Label htmlFor="genre">Genre</Label>
+          <Label htmlFor="characterName">Name</Label>
+          <Input id="characterName" placeholder="Enter a name" />
+        </div>
+        <div className="grid gap-3">
+          <Label htmlFor="genre">Race</Label>
           <Select>
             <SelectTrigger
               className="items-start [&_[data-description]]:hidden"
               id="genre"
             >
-              <SelectValue placeholder="Select a genre" />
+              <SelectValue placeholder="Select a race" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="fantasy">Fantasy</SelectItem>
-              <SelectItem value="sci-fi">Sci-Fi</SelectItem>
-              <SelectItem value="horror">Horror</SelectItem>
-              <SelectItem value="historical">Historical</SelectItem>
+              {characterRaces.map((race) => (
+                <SelectItem key={race} value={race}>
+                  {race}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
         <div className="grid gap-3">
-          <Label htmlFor="tone">Tone</Label>
+          <Label htmlFor="tone">Class</Label>
           <Select>
             <SelectTrigger
               className="items-start [&_[data-description]]:hidden"
               id="tone"
             >
-              <SelectValue placeholder="Select a tone" />
+              <SelectValue placeholder="Select a class" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="serious">Serious</SelectItem>
-              <SelectItem value="light-hearted">Light-hearted</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="epic">Epic</SelectItem>
+              {characterClasses.map((classType) => (
+                <SelectItem key={classType} value={classType}>
+                  {classType}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
         <div className="grid gap-3">
-          <Label htmlFor="topic">Topic</Label>
-          <Input id="topic" placeholder="Enter a topic" />
+          <Label htmlFor="characterDescription">Description</Label>
+          <Input
+            id="characterDescription"
+            placeholder="Enter a brief description"
+          />
         </div>
       </fieldset>
     </form>
