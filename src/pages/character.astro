@@ -1,0 +1,10 @@
+---
+import "../global.css";
+import { appName } from "../constants";
+import Layout from "../layouts/Layout.astro";
+import CharacterPage from "@/features/character/CharacterPage";
+---
+
+<Layout title={appName}>
+  <CharacterPage client:only="react" />
+</Layout>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { appName } from "./constants";
+  import { appName } from "../../constants";
   import { Info } from "lucide-svelte";
 
   let dialogElement: HTMLDialogElement;

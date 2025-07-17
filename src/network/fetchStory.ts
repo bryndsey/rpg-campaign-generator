@@ -1,6 +1,9 @@
 import { safeGetError } from "../safeGetError";
-import { tone, topic, state, setting } from "../stores/campaign";
-import { validateResponseBody, type ResponseBody } from "../types/ResponseBody";
+import { tone, topic, state, setting } from "../features/story/stores/campaign";
+import {
+  validateResponseBody,
+  type ResponseBody,
+} from "../features/story/types/ResponseBody";
 
 export const fetchStory = async () => {
   state.set({ state: "loading" });
