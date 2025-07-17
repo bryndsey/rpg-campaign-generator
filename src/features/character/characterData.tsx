@@ -12,7 +12,7 @@ export const characterGender = [
   "Trans Female",
   "Two-spirit",
   "Unknown",
-];
+] as const;
 
 export const characterClasses = [
   "Barbarian",
@@ -27,7 +27,7 @@ export const characterClasses = [
   "Sorcerer",
   "Warlock",
   "Wizard",
-];
+] as const;
 
 export const characterRaces = [
   "Dragonborn",
@@ -42,7 +42,7 @@ export const characterRaces = [
   "Human",
   "Orc",
   "Tiefling",
-];
+] as const;
 
 export const characterBackgrounds = [
   "Acolyte",
@@ -63,7 +63,8 @@ export const characterBackgrounds = [
   "Soldier",
   "Spy",
   "Urchin",
-];
+  "Unknown",
+] as const;
 
 const characterAlignments = [
   "Lawful good",
@@ -76,7 +77,7 @@ const characterAlignments = [
   "Neutral evil",
   "Chaotic evil",
   "Unaligned",
-];
+] as const;
 
 const abilityTypes = [
   "strength",
