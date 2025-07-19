@@ -4,9 +4,9 @@ import {
   HarmCategory,
 } from "@google/generative-ai";
 import type { APIRoute } from "astro";
-import { safeGetError } from "../safeGetError";
 import type { ResponseBody } from "../features/story/types/ResponseBody";
 import type { ResponseContent } from "../features/story/types/ResponseContent";
+import { safeGetError } from "../safeGetError";
 
 export const MAX_INPUT_CHARACTERS = 40;
 
@@ -31,6 +31,52 @@ async function run(
     );
   }
 
+  const storyResponse = await fetchStory(tone, topic, setting);
+
+  // console.log(response.text());
+  return {
+    story: storyResponse.text(),
+    theme: "",
+  };
+}
+
+export const GET: APIRoute = async ({ request }) => {
+  const urlObj = new URL(request.url);
+  let body: ResponseBody;
+  const tone = urlObj.searchParams.get("tone") ?? undefined;
+  const topic = urlObj.searchParams.get("topic") ?? undefined;
+  const setting = urlObj.searchParams.get("setting") ?? undefined;
+  try {
+    const content = await run(tone, topic, setting);
+    body = {
+      result: "success",
+      content,
+      tone,
+      topic,
+    };
+    return new Response(JSON.stringify(body));
+  } catch (error) {
+    const errorObj = safeGetError(error);
+    let errorCause: string | undefined = undefined;
+    if (errorObj.cause !== undefined && typeof errorObj.cause === "string") {
+      errorCause = errorObj.cause;
+    }
+    body = {
+      result: "error",
+      errorMessage: errorObj.message,
+      errorCause,
+      tone,
+      topic,
+    };
+    return new Response(JSON.stringify(body));
+  }
+};
+
+async function fetchStory(
+  tone: string | undefined,
+  topic: string | undefined,
+  setting: string | undefined,
+) {
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
@@ -86,13 +132,11 @@ async function run(
   //   { text: `topic: ${topic}` },
   //   { text: "output: " },
   // ];
-
   // const themeResult = await model.generateContent({
   //   contents: [{ role: "user", parts: themePromptParts }],
   //   generationConfig,
   //   safetySettings,
   // });
-
   // const themeResponse = themeResult.response;
   // const themePromptFeedback = themeResponse.promptFeedback;
   // if (
@@ -109,7 +153,6 @@ async function run(
   //   );
   // }
   // const themeText = themeResponse.text();
-
   const tonePromptText = tone ? ` The tone of the campaign is "${tone}".` : "";
   const topicPromptText = topic
     ? ` The campaign story includes the topic "${topic}".`
@@ -152,42 +195,5 @@ async function run(
       { cause: "SAFETY" },
     );
   }
-
-  // console.log(response.text());
-  return {
-    story: storyResponse.text(),
-    theme: "",
-  };
+  return storyResponse;
 }
-
-export const GET: APIRoute = async ({ request }) => {
-  const urlObj = new URL(request.url);
-  let body: ResponseBody;
-  const tone = urlObj.searchParams.get("tone") ?? undefined;
-  const topic = urlObj.searchParams.get("topic") ?? undefined;
-  const setting = urlObj.searchParams.get("setting") ?? undefined;
-  try {
-    const content = await run(tone, topic, setting);
-    body = {
-      result: "success",
-      content,
-      tone,
-      topic,
-    };
-    return new Response(JSON.stringify(body));
-  } catch (error) {
-    const errorObj = safeGetError(error);
-    let errorCause: string | undefined = undefined;
-    if (errorObj.cause !== undefined && typeof errorObj.cause === "string") {
-      errorCause = errorObj.cause;
-    }
-    body = {
-      result: "error",
-      errorMessage: errorObj.message,
-      errorCause,
-      tone,
-      topic,
-    };
-    return new Response(JSON.stringify(body));
-  }
-};
