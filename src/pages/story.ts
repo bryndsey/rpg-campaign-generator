@@ -1,8 +1,5 @@
-import {
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
+import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import type { APIRoute } from "astro";
 import type { ResponseBody } from "../features/story/types/ResponseBody";
 import type { ResponseContent } from "../features/story/types/ResponseContent";
@@ -10,7 +7,7 @@ import { safeGetError } from "../safeGetError";
 
 export const MAX_INPUT_CHARACTERS = 40;
 
-const MODEL_NAME = "gemini-pro";
+const MODEL_NAME = "gemini-2.5-flash"; //"gemini-pro";
 const API_KEY = import.meta.env.GOOGLE_GEN_AI_KEY;
 
 async function run(
@@ -35,7 +32,7 @@ async function run(
 
   // console.log(response.text());
   return {
-    story: storyResponse.text(),
+    story: storyResponse ?? "",
     theme: "",
   };
 }
@@ -77,15 +74,7 @@ async function fetchStory(
   topic: string | undefined,
   setting: string | undefined,
 ) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-  const generationConfig = {
-    temperature: 1,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
-  };
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
 
   const safetySettings = [
     {
@@ -105,6 +94,14 @@ async function fetchStory(
       threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
     },
   ];
+
+  const generationConfig = {
+    temperature: 1,
+    topK: 1,
+    topP: 1,
+    maxOutputTokens: 2048,
+    safetySettings,
+  };
 
   // const themePromptParts = [
   //   {
@@ -174,17 +171,16 @@ async function fetchStory(
     },
   ];
 
-  const storyResult = await model.generateContent({
+  const storyResult = await ai.models.generateContent({
+    model: MODEL_NAME,
     contents: [{ role: "user", parts: storyPromptParts }],
-    generationConfig,
-    safetySettings,
+    config: generationConfig,
   });
 
-  const storyResponse = storyResult.response;
-  const storyPromptFeedback = storyResponse.promptFeedback;
+  const storyPromptFeedback = storyResult.promptFeedback;
   if (
     storyPromptFeedback !== undefined &&
-    storyPromptFeedback.blockReasonMessage !== undefined
+    storyPromptFeedback.blockReason !== undefined
   ) {
     throw new Error(
       `The prompt was blocked due to ${storyPromptFeedback.blockReason.toLocaleLowerCase()}. You may need to modify your prompt to reduce the chances of blocked content.${
@@ -195,5 +191,5 @@ async function fetchStory(
       { cause: "SAFETY" },
     );
   }
-  return storyResponse;
+  return storyResult.text;
 }
