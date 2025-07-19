@@ -1,9 +1,9 @@
-import { safeGetError } from "../safeGetError";
-import { tone, topic, state, setting } from "../features/story/stores/campaign";
+import { setting, state, tone, topic } from "../features/story/stores/campaign";
 import {
   validateResponseBody,
   type ResponseBody,
 } from "../features/story/types/ResponseBody";
+import { safeGetError } from "../safeGetError";
 
 export const fetchStory = async () => {
   state.set({ state: "loading" });
@@ -24,11 +24,14 @@ export const fetchStory = async () => {
       queryParams.append("setting", $setting);
     }
 
-    const fetchResult = await fetch(`./story?${queryParams.toString()}`).then(
-      (x) => x.json(),
-    );
+    const fetchResult = await fetch(`./story?${queryParams.toString()}`);
+    if (!fetchResult.ok) {
+      const error = `Error: ${fetchResult.status} - ${fetchResult.statusText}`;
+      throw new Error(error, { cause: "API_ERROR" });
+    }
+    const fetchJson = await fetchResult.json();
 
-    const data = validateResponseBody(fetchResult);
+    const data = validateResponseBody(fetchJson);
 
     state.set({
       state: "data",
